@@ -3,6 +3,7 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 
 
 public class Coffee extends MenuItem {
@@ -16,10 +17,10 @@ public class Coffee extends MenuItem {
     private Size size;
     private ObservableList<AddIns> addIns;
 
-    public Coffee (Size size, ObservableList<AddIns> addIns) {
+    public Coffee (Size size) {
         this.size = size;
-        this.addIns = addIns;
-        price();
+        this.addIns = FXCollections.observableArrayList();
+        price(); // also sets the price
     }
 
     @Override
@@ -36,6 +37,26 @@ public class Coffee extends MenuItem {
         return price;
     }
 
+    public void setSize (Size size) {
+        this.size = size;
+    }
+
+    public boolean addAddIn(AddIns newAddIn) {
+        if (!addIns.contains(newAddIn)) {
+            addIns.add(newAddIn);
+            price();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeAddIn(AddIns removeAddIn) {
+        boolean success = addIns.remove(removeAddIn);
+        price();
+        return success;
+    }
+
+
     public static ObservableList<Size> getSizeList(){
         return FXCollections.observableArrayList(Size.values());
     }
@@ -48,11 +69,14 @@ public class Coffee extends MenuItem {
         //testing
         ObservableList<AddIns> addIns1 = Coffee.getCoffeeAddInList();
         ObservableList<Size> size = Coffee.getSizeList();
-        ObservableList<AddIns> test = FXCollections.observableArrayList();
+        ArrayList<AddIns> test = new ArrayList<>();
         test.add(addIns1.get(2));
 
-        Coffee coffeeTest = new Coffee(size.get(1), test);
+        Coffee coffeeTest = new Coffee(size.get(1));
 
+        System.out.println(coffeeTest.getPrice());
+
+        coffeeTest.addAddIn(addIns1.get(1));
         System.out.println(coffeeTest.getPrice());
     }
 
