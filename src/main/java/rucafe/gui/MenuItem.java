@@ -2,8 +2,8 @@ package rucafe.gui;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import java.text.DecimalFormat;
 
-import java.util.ArrayList;
 
 abstract public class MenuItem {
     private DoubleProperty price = new SimpleDoubleProperty();
@@ -27,7 +27,7 @@ abstract public class MenuItem {
 
     @Override
     public String toString () {
-        return String.format("%.2f", getPrice());
+        return "$" + new DecimalFormat("###.##").format(getPrice());
     }
 
     public static void main (String[] args) {
