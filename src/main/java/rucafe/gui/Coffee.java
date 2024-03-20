@@ -16,8 +16,10 @@ public class Coffee extends MenuItem {
 
     private Size size;
     private ObservableList<AddIns> addIns;
+    private int quantity;
 
     public Coffee (Size size) {
+        this.quantity = 1;
         this.size = size;
         this.addIns = FXCollections.observableArrayList();
         price(); // also sets the price

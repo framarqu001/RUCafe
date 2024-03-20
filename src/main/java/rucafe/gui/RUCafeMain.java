@@ -10,9 +10,11 @@ import java.io.IOException;
 public class RUCafeMain extends Application {
     @Override
     public void start (Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(RUCafeMain.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(RUCafeMain.class.getResource("mainView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        RUCafeMainController mainController = fxmlLoader.getController();
+        mainController.setPrimaryStage(stage, scene);
+        stage.setTitle("RUCafe");
         stage.setScene(scene);
         stage.show();
     }
