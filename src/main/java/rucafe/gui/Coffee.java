@@ -35,6 +35,7 @@ public class Coffee extends MenuItem {
             case GRANDE -> price += 1.00;
             case VENTI -> price += 1.50;
         }
+        price *= quantity;
         setPrice(price);
         return price;
     }

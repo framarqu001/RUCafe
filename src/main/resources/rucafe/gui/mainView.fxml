@@ -13,5 +13,6 @@
             <Button mnemonicParsing="false" prefHeight="152.0" prefWidth="136.0" text="Button" />
          </children>
       </HBox>
+      <Button layoutX="150.0" layoutY="395.0" mnemonicParsing="false" onAction="#displayCurrentOrderView" prefHeight="26.0" prefWidth="128.0" text="Current Order" />
    </children>
 </AnchorPane>

@@ -1,14 +1,10 @@
 package rucafe.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class CoffeeController {
+public class CurrentOrderController {
     private Stage primaryStage;
     private Scene primaryScene;
 
@@ -21,5 +17,4 @@ public class CoffeeController {
     protected void displayMain(){
         primaryStage.setScene(primaryScene);
     }
-
 }
