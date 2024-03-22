@@ -14,7 +14,7 @@ public class Sandwich extends MenuItem {
     /**
      * Enum meant to represent the types of sandwiches a person can order along with their prices.
      */
-    enum SandwichType{
+    enum Protein{
         BEEF(10.99), CHICKEN(8.99), FISH(9.99);
 
         final double price;
@@ -23,7 +23,7 @@ public class Sandwich extends MenuItem {
          * Constructor for Sandwich Type, takes in price as parameter
          * @param price the price of the sandwich.
          */
-        SandwichType(double price) {
+        Protein(double price) {
             this.price = price;
         }
 
@@ -39,7 +39,7 @@ public class Sandwich extends MenuItem {
     /**
      * Enum meant to represent add-ins for a sandwich along with their extra charge/price.
      */
-    enum AddIn {
+    enum AddOn {
         CHEESE(1.0), LETTUCE(0.3), TOMATOES(0.3), ONIONS(0.3);
 
         final double price;
@@ -48,7 +48,7 @@ public class Sandwich extends MenuItem {
          * Constructor for AddIn, takes in price as parameter
          * @param price the price of the AddIn.
          */
-        AddIn(double price) {
+        AddOn(double price) {
             this.price = price;
         }
 
@@ -68,58 +68,66 @@ public class Sandwich extends MenuItem {
         BAGEL, WHEAT, SOURDOUGH;
     }
 
-    private SandwichType sandwichType;
+    private Protein protein;
     private Bread bread;
-    private ObservableList<Sandwich.AddIn> addIns;
+    private ObservableList<Sandwich.AddOn> addOns;
 
     /**
-     * Constructor for a sandwich, takes in the sandwich type and its bread.
-     * @param sandwichType the type of sandwich
+     * Constructor for a sandwich, takes in the protein and its bread.
+     * @param protein the protein of sandwich
      * @param bread the bread of the sandwich
      */
-    public Sandwich(SandwichType sandwichType, Bread bread) {
-        this.sandwichType = sandwichType;
+    public Sandwich(Protein protein, Bread bread) {
+        this.protein = protein;
         this.bread = bread;
-        this.addIns = FXCollections.observableArrayList();
+        this.addOns = FXCollections.observableArrayList();
         setPrice(price());
     }
 
     /**
-     * Helper method, returns the extra charge for all the add-ins in the sandwich
-     * @return the price of all the add-ins in the sandwich
+     * Default constructor for sandwich, all values are null.
      */
-    private double getAddInsPrice() {
+    public Sandwich() {
+        this.addOns = FXCollections.observableArrayList();
+        setPrice(0);
+    }
+
+    /**
+     * Helper method, returns the extra charge for all the add-ons in the sandwich
+     * @return the price of all the add-ons in the sandwich
+     */
+    private double getAddOnsPrice() {
         double price = 0;
-        for (AddIn extraAddIns : addIns) {
-            price += extraAddIns.getPrice();
+        for (AddOn extraAddOns : addOns) {
+            price += extraAddOns.getPrice();
         }
         return price;
     }
 
     /**
-     * Helper method, returns a string containing all the adds-ins in the sandwich
+     * Helper method, returns a string containing all the adds-ons in the sandwich
      * @return returns a string containing all the adds-ins in the sandwich, if there is none returns "NONE"
      */
-    private String addInsString() {
-        String addInString = "";
+    private String addOnsString() {
+        String addOnString = "";
         int removeCommaAndSpace = 2;
 
-        for (AddIn extraAddIns : addIns) {
-            addInString += extraAddIns.name() + ", ";
+        for (AddOn extraAddOns : addOns) {
+            addOnString += extraAddOns.name() + ", ";
         }
 
-        if(addInString.isEmpty())
+        if(addOnString.isEmpty())
             return "NONE";
         else
-            return addInString.substring(0, addInString.length() - removeCommaAndSpace);
+            return addOnString.substring(0, addOnString.length() - removeCommaAndSpace);
     }
 
     /**
-     * Given a sandwich type, sets the type of the sandwich to that value.
-     * @param sandwichType the type of sandwich the sandwich will be changed to.
+     * Given a protein, sets the type of the protein to that value.
+     * @param protein the type of protein the sandwich will be changed to.
      */
-    public void setSandwichType(SandwichType sandwichType) {
-        this.sandwichType = sandwichType;
+    public void setProtein(Protein protein) {
+        this.protein = protein;
         setPrice(price());
     }
 
@@ -132,13 +140,13 @@ public class Sandwich extends MenuItem {
     }
 
     /**
-     * Given an add-In adds that to the sandwich if it wasn't already on there.
-     * @param addIn the add-in attempting to be added.
+     * Given an add-On adds that to the sandwich if it wasn't already on there.
+     * @param addOn the add-on attempting to be added.
      * @return true if was successful in adding, false if otherwise.
      */
-    public boolean addAddIn(AddIn addIn) {
-        if(!(addIns.contains(addIn))) {
-            addIns.add(addIn);
+    public boolean addAddOn(AddOn addOn) {
+        if(!(addOns.contains(addOn))) {
+            addOns.add(addOn);
             setPrice(price());
             return true;
         }
@@ -146,63 +154,72 @@ public class Sandwich extends MenuItem {
     }
 
     /**
-     * Given an array of add-Ins adds them to the sandwich if they weren't already on there.
-     * @param addIns the add-ins attempting to be added.
+     * Given an array of add-Ons adds them to the sandwich if they weren't already on there.
+     * @param addOns the add-ons attempting to be added.
      */
-    public void addAddIns(AddIn [] addIns) {
-        for (AddIn extraAddIns : addIns)
-            addAddIn(extraAddIns);
+    public void addAddOns(AddOn [] addOns) {
+        for (AddOn extraAddOns : addOns)
+            addAddOn(extraAddOns);
     }
 
     /**
      * Given an add-In removes that off the sandwich if it was there.
-     * @param addIn the add-in attempting to be removed.
+     * @param addOn the add-in attempting to be removed.
      * @return true if was successful in removing, false if otherwise.
      */
-    public boolean removeAddIn(AddIn addIn) {
-        boolean success = addIns.remove(addIn);
+    public boolean removeAddOn(AddOn addOn) {
+        boolean success = addOns.remove(addOn);
         setPrice(price());
         return success;
     }
 
     /**
-     * Given an array of add-Ins removes them from the sandwich if they were already on there.
-     * @param addIns the add-ins attempting to be removed.
+     * Given an array of add-ons removes them from the sandwich if they were already on there.
+     * @param addOns the add-ons attempting to be removed.
      */
-    public void removeAddIns(AddIn [] addIns) {
-        for (AddIn extraAddIns : addIns)
-            removeAddIn(extraAddIns);
+    public void removeAddOns(AddOn [] addOns) {
+        for (AddOn extraAddOns : addOns)
+            removeAddOn(extraAddOns);
     }
 
     /**
-     * Returns the price of the sandwich based on its type and the extra add-ins
+     * Determines if a sandwich does not have its protein or bread set.
+     * @return true if either protein or bread is null, false otherwise.
+     */
+    public boolean isIncomplete() {
+        return protein == null || bread == null;
+    }
+
+    /**
+     * Returns the price of the sandwich based on the protein and the extra add-ons
      * @return the price of the sandwich.
      */
     @Override
     public double price () {
         double price = 0;
         int rounding = 100;
-        price += (sandwichType.getPrice() * rounding);
-        price += (getAddInsPrice() * rounding);
+        double proteinPrice = protein != null ? (protein.getPrice() * rounding) : 0;
+        price += proteinPrice;
+        price += (getAddOnsPrice() * rounding);
         return price / rounding;
     }
 
     /**
-     * Returns a string representing the sandwich, lists its type, its bread, its add-ins and its price.
-     * @return a string of the format "Sandwich: [type] \tBread: [bread] \t Add-Ins: [add-Ins] \t Price: [price]"
+     * Returns a string representing the sandwich, lists its protein, its bread, its add-ons and its price.
+     * @return a string of the format "Sandwich: [protein] \tBread: [bread] \t Add-Ons: [add-Ons] \t Price: [price]"
      */
     @Override
     public String toString() {
-        return "Sandwich: " + sandwichType + "\tBread: " + bread + "\tAdd-Ins: "
-                + addInsString() + "\tPrice: " + super.toString();
+        return "Sandwich: " + protein + "\tBread: " + bread + "\tAdd-Ins: "
+                + addOnsString() + "\tPrice: " + super.toString();
     }
 
     /**
-     * Returns an observable list containing all the add-in values.
-     * @return an observable list containing all the add-in values.
+     * Returns an observable list containing all the add-on values.
+     * @return an observable list containing all the add-on values.
      */
-    public static ObservableList<AddIn> getSandwichAddInList(){
-        return FXCollections.observableArrayList(AddIn.values());
+    public static ObservableList<AddOn> getSandwichAddOnList(){
+        return FXCollections.observableArrayList(AddOn.values());
     }
 
     /**
@@ -214,10 +231,10 @@ public class Sandwich extends MenuItem {
     }
 
     /**
-     * Returns an observable list containing all the sandwich type values.
-     * @return an observable list containing all the sandwich type values.
+     * Returns an observable list containing all the protein values.
+     * @return an observable list containing all the protein values.
      */
-    public static ObservableList<SandwichType> getSandwichTypeList(){
-        return FXCollections.observableArrayList(SandwichType.values());
+    public static ObservableList<Protein> getProteinList(){
+        return FXCollections.observableArrayList(Protein.values());
     }
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="563.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rucafe.gui.SandwichController">
+   <children>
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="563.0" prefWidth="710.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="43.0" prefWidth="712.0" text="Customize Your Sandwich!">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="iv_Sandwich" fitHeight="216.0" fitWidth="712.0" pickOnBounds="true" preserveRatio="true" />
+            <GridPane prefHeight="290.0" prefWidth="712.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="0.0" prefWidth="79.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="475.0" minWidth="10.0" prefWidth="167.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="48.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="45.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="158.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="59.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="166.0" text="Bread:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmb_Bread" onAction="#setBread" prefHeight="25.0" prefWidth="167.0" promptText="Select Your Bread" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="166.0" text="Protein:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmb_Protein" onAction="#setProtein" prefHeight="25.0" prefWidth="167.0" promptText="Select Your Protein" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="164.0" text="Add-Ons:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="chk_cheese" mnemonicParsing="false" onAction="#addCheese" prefHeight="26.0" prefWidth="164.0" text="Cheese" />
+                        <CheckBox fx:id="chk_lettuce" mnemonicParsing="false" onAction="#addLettuce" prefHeight="26.0" prefWidth="164.0" text="Lettuce" />
+                        <CheckBox fx:id="chk_tomatoes" mnemonicParsing="false" onAction="#addTomatoes" prefHeight="26.0" prefWidth="164.0" text="Tomatoes" />
+                        <CheckBox fx:id="chk_onions" mnemonicParsing="false" onAction="#addOnions" prefHeight="23.0" prefWidth="73.0" text="Onions" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="31.0" prefWidth="168.0" text="Subtotal:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_price" editable="false" />
+                        <Label prefHeight="34.0" prefWidth="168.0" />
+                        <Button fx:id="btn_addToOrder" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Add To Order">
+                           <VBox.margin>
+                              <Insets left="35.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <children>
+                        <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="76.0" text="Clear">
+                           <VBox.margin>
+                              <Insets left="40.0" top="35.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btn_back" mnemonicParsing="false" onAction="#displayMain" prefHeight="25.0" prefWidth="77.0" text="Back">
+                           <VBox.margin>
+                              <Insets left="40.0" top="35.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
