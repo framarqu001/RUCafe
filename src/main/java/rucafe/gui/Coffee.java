@@ -59,6 +59,11 @@ public class Coffee extends MenuItem {
         return success;
     }
 
+    public void setQuantity(int amount){
+        quantity = amount;
+        price();
+    }
+
 
     public static ObservableList<Size> getSizeList(){
         return FXCollections.observableArrayList(Size.values());
@@ -81,6 +86,10 @@ public class Coffee extends MenuItem {
 
         coffeeTest.addAddIn(addIns1.get(1));
         System.out.println(coffeeTest.getPrice());
+
+        coffeeTest.setQuantity(3);
+        System.out.println(coffeeTest);
+
     }
 
 }

@@ -2,11 +2,15 @@ package rucafe.gui;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.text.DecimalFormat;
 
 
 abstract public class MenuItem {
-    private DoubleProperty price = new SimpleDoubleProperty();
+    double price;
+    private StringProperty priceString = new SimpleStringProperty(); // come back to this
 
     public MenuItem () {
     }
@@ -14,16 +18,13 @@ abstract public class MenuItem {
     public abstract double price();
 
     public double getPrice () {
-        return price.get();
-    }
-
-    public DoubleProperty priceProperty() {
         return price;
     }
 
     public void setPrice (double newPrice) {
-        price.set(newPrice);
+        price = newPrice;
     }
+
 
     @Override
     public String toString () {
