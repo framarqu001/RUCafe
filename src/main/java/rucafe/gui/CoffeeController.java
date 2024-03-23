@@ -36,13 +36,13 @@ public class CoffeeController {
         Coffee copy = new Coffee(coffeeOrder);
         currentOrder.addToOrder(copy);
         coffeeOrder.reset();
+        //create stuff to reset the gui. add quantity
 
     }
 
     public void initialize() {
         rb_small.setSelected(true);
         tf_total.textProperty().bind(coffeeOrder.priceStringProperty()); // textbox binded to Coffee priceString.
-
         size.selectedToggleProperty().addListener((observable) -> {
             RadioButton currentButton = (RadioButton) size.getSelectedToggle();
             if (currentButton == rb_small) {
@@ -56,8 +56,6 @@ public class CoffeeController {
             }
         });
     }
-
-
 
     @FXML
     void setCaramel() {
