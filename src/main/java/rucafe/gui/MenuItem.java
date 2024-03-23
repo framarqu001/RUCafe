@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 
 abstract public class MenuItem {
     double price;
-    private StringProperty priceString = new SimpleStringProperty(); // come back to this
+    private StringProperty priceStringProperty= new SimpleStringProperty(); // come back to this
 
     public MenuItem () {
     }
@@ -23,8 +23,21 @@ abstract public class MenuItem {
 
     public void setPrice (double newPrice) {
         price = newPrice;
+        setPriceString();
     }
 
+    public String getPriceString () {
+        return priceStringProperty.get();
+    }
+
+    public StringProperty priceStringProperty () {
+        return priceStringProperty;
+    }
+
+    public void setPriceString () {
+        String string = "$" + new DecimalFormat("###.##").format(getPrice());
+        this.priceStringProperty.set(string);
+    }
 
     @Override
     public String toString () {

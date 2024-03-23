@@ -17,6 +17,7 @@ public class RUCafeMain extends Application {
         stage.setTitle("RUCafe");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main (String[] args) {

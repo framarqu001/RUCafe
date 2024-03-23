@@ -14,6 +14,8 @@ import java.io.IOException;
 public class RUCafeMainController {
     private Stage primaryStage;
     private Scene primaryScene;
+    private Order currentOrder = new Order();
+    private OrderList orderList = new OrderList();
 
     private final String SANDWICH_FXML_PATH = "sandwichView.fxml";
 
@@ -31,6 +33,7 @@ public class RUCafeMainController {
             primaryStage.setScene(scene);
             CoffeeController coffeeController = loader.getController();
             coffeeController.setPrimaryStage(primaryStage, primaryScene);
+            coffeeController.setCurrentOrder(currentOrder);
 
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -47,8 +50,9 @@ public class RUCafeMainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("currentOrderView.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
-            CurrentOrderController coffeeController = loader.getController();
-            coffeeController.setPrimaryStage(primaryStage, primaryScene);
+            CurrentOrderController currentOrderController = loader.getController();
+            currentOrderController.setPrimaryStage(primaryStage, primaryScene);
+
 
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

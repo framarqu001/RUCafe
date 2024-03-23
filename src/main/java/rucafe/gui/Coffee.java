@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 
 public class Coffee extends MenuItem {
-    private enum Size {
+    public enum Size {
         SHORT, TALL, GRANDE, VENTI;
     }
-    private enum AddIns {
+    public enum AddIns {
         SWEET_CREAM, FRENCH_VANILLA, IRISH_CREAM, CARAMEL, MOCHA;
     }
 
@@ -18,11 +18,18 @@ public class Coffee extends MenuItem {
     private ObservableList<AddIns> addIns;
     private int quantity;
 
-    public Coffee (Size size) {
-        this.quantity = 1;
-        this.size = size;
+
+    public Coffee() {
         this.addIns = FXCollections.observableArrayList();
-        price(); // also sets the price
+        quantity = 1;
+        size = Size.SHORT;
+        price();
+    }
+
+    public Coffee(Coffee copy) {
+        this.size = copy.size;
+        this.addIns = copy.addIns;
+        this.quantity = copy.quantity;
     }
 
     @Override
@@ -42,6 +49,7 @@ public class Coffee extends MenuItem {
 
     public void setSize (Size size) {
         this.size = size;
+        price();
     }
 
     public boolean addAddIn(AddIns newAddIn) {
@@ -64,31 +72,18 @@ public class Coffee extends MenuItem {
         price();
     }
 
-
-    public static ObservableList<Size> getSizeList(){
-        return FXCollections.observableArrayList(Size.values());
-    }
-
-    public static ObservableList<AddIns> getCoffeeAddInList(){
-        return FXCollections.observableArrayList(AddIns.values());
+    public void reset(){
+        this.quantity = 1;
+        this.size = Size.SHORT;
+        addIns.clear();
+        price();
     }
 
     public static void main (String[] args) {
-        //testing
-        ObservableList<AddIns> addIns1 = Coffee.getCoffeeAddInList();
-        ObservableList<Size> size = Coffee.getSizeList();
-        ArrayList<AddIns> test = new ArrayList<>();
-        test.add(addIns1.get(2));
 
-        Coffee coffeeTest = new Coffee(size.get(1));
+        Coffee coffeeTest2 = new Coffee();
+        System.out.println(coffeeTest2.getPriceString());
 
-        System.out.println(coffeeTest.getPrice());
-
-        coffeeTest.addAddIn(addIns1.get(1));
-        System.out.println(coffeeTest.getPrice());
-
-        coffeeTest.setQuantity(3);
-        System.out.println(coffeeTest);
 
     }
 
