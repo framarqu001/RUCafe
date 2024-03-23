@@ -73,6 +73,7 @@ public class RUCafeMainController {
 
             SandwichController sc = loader.getController();
             sc.setPrimaryStage(primaryStage, primaryScene);
+            sc.setCurrentOrder(currentOrder);
         }
         catch(IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

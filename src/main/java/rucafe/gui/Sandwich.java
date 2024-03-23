@@ -34,6 +34,11 @@ public class Sandwich extends MenuItem {
         public double getPrice() {
             return this.price;
         }
+
+        @Override
+        public String toString() {
+            return this.name() + " - $" + price;
+        }
     }
 
     /**
@@ -85,6 +90,17 @@ public class Sandwich extends MenuItem {
     }
 
     /**
+     * Clone constructor for a sandwich, takes in a sandwich object and makes an identical one.
+     * @param sandwich the sandwich to be copied.
+     */
+    public Sandwich(Sandwich sandwich) {
+        this.protein = sandwich.protein;
+        this.bread = sandwich.bread;
+        this.addOns = FXCollections.observableArrayList();
+        this.addOns.addAll(sandwich.addOns);
+    }
+
+    /**
      * Default constructor for sandwich, all values are null.
      */
     public Sandwich() {
@@ -113,11 +129,11 @@ public class Sandwich extends MenuItem {
         int removeCommaAndSpace = 2;
 
         for (AddOn extraAddOns : addOns) {
-            addOnString += extraAddOns.name() + ", ";
+            addOnString += extraAddOns.name().toLowerCase() + ", ";
         }
 
         if(addOnString.isEmpty())
-            return "NONE";
+            return "none";
         else
             return addOnString.substring(0, addOnString.length() - removeCommaAndSpace);
     }
@@ -210,8 +226,8 @@ public class Sandwich extends MenuItem {
      */
     @Override
     public String toString() {
-        return "Sandwich: " + protein + "\tBread: " + bread + "\tAdd-Ins: "
-                + addOnsString() + "\tPrice: " + super.toString();
+        return "Protein: " + protein.name().toLowerCase() + " Bread: " + bread.toString().toLowerCase() + " Add-Ins: "
+                + addOnsString() + " Price: $" + price;
     }
 
     /**

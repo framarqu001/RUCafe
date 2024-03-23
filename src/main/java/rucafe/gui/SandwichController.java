@@ -2,6 +2,7 @@ package rucafe.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -14,6 +15,7 @@ import java.util.Objects;
 public class SandwichController {
     private Stage primaryStage;
     private Scene primaryScene;
+    private Order currentOrder;
     private RUCafeMainController mainController;
 
     @FXML
@@ -40,6 +42,29 @@ public class SandwichController {
             sandwich = new Sandwich();
     }
 
+    private void manageAddOns(CheckBox box, Sandwich.AddOn addOn) {
+        if(box.isSelected())
+            sandwich.addAddOn(addOn);
+        else
+            sandwich.removeAddOn(addOn);
+    }
+
+    private void alertIncompleteSandwich() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Unfinished Order");
+        alert.setHeaderText("Bread/Protein Not Selected");
+        alert.setContentText("Please choose your protein/bread to complete your order.");
+        alert.showAndWait();
+    }
+
+    private void successAddSandwich() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Added to Order");
+        alert.setHeaderText("Sandwich added to order");
+        alert.setContentText("Your Sandwich (" + sandwich + ") was successfully added to your order!");
+        alert.showAndWait();
+    }
+
     public void setPrimaryStage(Stage stage, Scene scene) {
         primaryStage = stage;
         primaryScene = scene;
@@ -54,6 +79,12 @@ public class SandwichController {
         cmb_Bread.setItems(Sandwich.getBreadList());
         cmb_Protein.setItems(Sandwich.getProteinList());
         setSandwich();
+
+        tf_price.textProperty().bind(sandwich.priceStringProperty());
+    }
+
+    public void setCurrentOrder(Order order){
+        currentOrder = order;
     }
 
     @FXML
@@ -68,27 +99,29 @@ public class SandwichController {
 
     @FXML
     protected void addCheese() {
-        sandwich.addAddOn(Sandwich.AddOn.CHEESE);
+        manageAddOns(chk_cheese, Sandwich.AddOn.CHEESE);
     }
 
     @FXML
     protected void addLettuce() {
-        sandwich.addAddOn(Sandwich.AddOn.LETTUCE);
+        manageAddOns(chk_lettuce, Sandwich.AddOn.LETTUCE);
     }
 
     @FXML
     protected void addTomatoes() {
-        sandwich.addAddOn(Sandwich.AddOn.TOMATOES);
+        manageAddOns(chk_tomatoes, Sandwich.AddOn.TOMATOES);
     }
 
     @FXML
     protected void addOnions() {
-        sandwich.addAddOn(Sandwich.AddOn.ONIONS);
+        manageAddOns(chk_onions, Sandwich.AddOn.ONIONS);
     }
 
     @FXML
     protected void clear() {
         sandwich = new Sandwich();
+        tf_price.textProperty().bind(sandwich.priceStringProperty());
+
         cmb_Bread.valueProperty().set(null);
         cmb_Protein.valueProperty().set(null);
 
@@ -96,6 +129,22 @@ public class SandwichController {
         chk_lettuce.setSelected(false);
         chk_onions.setSelected(false);
         chk_tomatoes.setSelected(false);
+    }
+
+    @FXML
+    void addToOrder() {
+        if(sandwich.isIncomplete()) {
+            alertIncompleteSandwich();
+            return;
+        }
+
+        Sandwich copy = new Sandwich(sandwich);
+        currentOrder.addToOrder(copy);
+        successAddSandwich();
+
+        sandwich = new Sandwich();
+        tf_price.textProperty().bind(sandwich.priceStringProperty());
+        clear();
     }
 
     @FXML

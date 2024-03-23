@@ -69,10 +69,10 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="chk_cheese" mnemonicParsing="false" onAction="#addCheese" prefHeight="26.0" prefWidth="164.0" text="Cheese" />
-                        <CheckBox fx:id="chk_lettuce" mnemonicParsing="false" onAction="#addLettuce" prefHeight="26.0" prefWidth="164.0" text="Lettuce" />
-                        <CheckBox fx:id="chk_tomatoes" mnemonicParsing="false" onAction="#addTomatoes" prefHeight="26.0" prefWidth="164.0" text="Tomatoes" />
-                        <CheckBox fx:id="chk_onions" mnemonicParsing="false" onAction="#addOnions" prefHeight="23.0" prefWidth="73.0" text="Onions" />
+                        <CheckBox fx:id="chk_cheese" mnemonicParsing="false" onAction="#addCheese" prefHeight="26.0" prefWidth="164.0" text="Cheese - $1.00" />
+                        <CheckBox fx:id="chk_lettuce" mnemonicParsing="false" onAction="#addLettuce" prefHeight="26.0" prefWidth="164.0" text="Lettuce - $0.30" />
+                        <CheckBox fx:id="chk_tomatoes" mnemonicParsing="false" onAction="#addTomatoes" prefHeight="26.0" prefWidth="164.0" text="Tomatoes - $0.30" />
+                        <CheckBox fx:id="chk_onions" mnemonicParsing="false" onAction="#addOnions" prefHeight="23.0" prefWidth="117.0" text="Onions - $0.30" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -84,7 +84,7 @@
                         </Label>
                         <TextField fx:id="tf_price" editable="false" />
                         <Label prefHeight="34.0" prefWidth="168.0" />
-                        <Button fx:id="btn_addToOrder" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Add To Order">
+                        <Button fx:id="btn_addToOrder" alignment="CENTER" mnemonicParsing="false" onAction="#addToOrder" prefHeight="25.0" prefWidth="91.0" text="Add To Order">
                            <VBox.margin>
                               <Insets left="35.0" />
                            </VBox.margin>
