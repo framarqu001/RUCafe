@@ -14,7 +14,6 @@ import java.util.Objects;
 public class SandwichController {
     private Stage primaryStage;
     private Scene primaryScene;
-    private Coffee coffeeOrder = new Coffee();
     private RUCafeMainController mainController;
 
     @FXML
