@@ -1,5 +1,6 @@
 package rucafe.gui;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import java.util.Optional;
 
 public class CoffeeController {
     private Stage primaryStage;
@@ -31,13 +33,23 @@ public class CoffeeController {
     private ToggleGroup size;
 
     @FXML
-    void addToOrder() {
-        System.out.println("hey");
-        Coffee copy = new Coffee(coffeeOrder);
-        currentOrder.addToOrder(copy);
-        coffeeOrder.reset();
-        //create stuff to reset the gui. add quantity
+    private ChoiceBox<Integer> cb_quantity;
 
+    @FXML
+    void addToOrder() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Order confirmation");
+        alert.setContentText("Do you want to place this order?");
+        Optional<ButtonType> button = alert.showAndWait();
+        if (button.get() == ButtonType.OK) {
+            Coffee copy = new Coffee(coffeeOrder);
+            currentOrder.addToOrder(copy);
+            Alert confirmAlert = new Alert(Alert.AlertType.INFORMATION);
+            confirmAlert.setTitle("Order Status");
+            confirmAlert.setContentText("Coffee has been added to cart");
+            confirmAlert.showAndWait();
+            primaryStage.setScene(primaryScene);
+        }
     }
 
     public void initialize() {
@@ -54,6 +66,13 @@ public class CoffeeController {
             } else if (currentButton == rb_venti) {
                 coffeeOrder.setSize(Coffee.Size.VENTI);
             }
+        });
+
+        ObservableList<Integer> quantities = FXCollections.observableArrayList(1,2,3,4,5);
+        cb_quantity.setItems(quantities);
+        cb_quantity.setValue(1);
+        cb_quantity.valueProperty().addListener((observable) -> {
+            coffeeOrder.setQuantity(cb_quantity.getValue());
         });
     }
 
@@ -107,7 +126,14 @@ public class CoffeeController {
         primaryStage.setScene(primaryScene);
     }
 
+    private void resetCheckBoxes() {
+        cb_frenchVanilla.setSelected(false);
+        cb_sweetCream.setSelected(false);
+        cb_mocha.setSelected(false);
+        cb_caramel.setSelected(false);
+        cb_IrishCream.setSelected(false);
 
+    }
     public void setPrimaryStage(Stage stage, Scene scene) {
         primaryStage = stage;
         primaryScene = scene;

@@ -94,6 +94,7 @@ public class Sandwich extends MenuItem {
      * @param sandwich the sandwich to be copied.
      */
     public Sandwich(Sandwich sandwich) {
+        super(sandwich);
         this.protein = sandwich.protein;
         this.bread = sandwich.bread;
         this.addOns = FXCollections.observableArrayList();

@@ -9,9 +9,20 @@ import java.util.ArrayList;
 public class Coffee extends MenuItem {
     public enum Size {
         SHORT, TALL, GRANDE, VENTI;
+        @Override
+        public String toString () {
+            String string = name().toLowerCase();
+            return string.substring(0,1).toUpperCase() + string.substring(1);
+        }
     }
     public enum AddIns {
         SWEET_CREAM, FRENCH_VANILLA, IRISH_CREAM, CARAMEL, MOCHA;
+
+        @Override
+        public String toString () {
+            String string = name().toLowerCase();
+            return string.substring(0,1).toUpperCase() + string.substring(1);
+        }
     }
 
     private Size size;
@@ -27,6 +38,7 @@ public class Coffee extends MenuItem {
     }
 
     public Coffee(Coffee copy) {
+        super(copy);
         this.size = copy.size;
         this.addIns = copy.addIns;
         this.quantity = copy.quantity;
@@ -77,6 +89,12 @@ public class Coffee extends MenuItem {
         this.size = Size.SHORT;
         addIns.clear();
         price();
+    }
+
+    @Override
+    public String toString () {
+        String addinString = addIns.isEmpty() ? "None" : addIns.toString();
+        return quantity + " " + size + " Coffee Add-Ins: " + addinString + " Total: " + getPriceString();
     }
 
     public static void main (String[] args) {

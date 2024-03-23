@@ -10,9 +10,16 @@ import java.text.DecimalFormat;
 
 abstract public class MenuItem {
     double price;
-    private StringProperty priceStringProperty= new SimpleStringProperty(); // come back to this
+    private StringProperty priceStringProperty; // come back to this
 
     public MenuItem () {
+        priceStringProperty = new SimpleStringProperty();
+    }
+
+    public MenuItem(MenuItem menuItem) {
+        this.price = menuItem.price;
+        this.priceStringProperty = new SimpleStringProperty();
+        this.priceStringProperty.set(menuItem.getPriceString());
     }
 
     public abstract double price();

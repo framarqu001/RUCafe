@@ -52,6 +52,7 @@ public class RUCafeMainController {
             primaryStage.setScene(scene);
             CurrentOrderController currentOrderController = loader.getController();
             currentOrderController.setPrimaryStage(primaryStage, primaryScene);
+            currentOrderController.setCurrentOrder(currentOrder);
 
 
         } catch (IOException e) {
