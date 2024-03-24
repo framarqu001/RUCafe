@@ -5,23 +5,76 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-
+/**
+ * The Coffee class represents a coffee as part of an order of Menu Items.
+ * A coffee has to have a size of Short, Tall, Grande, or Venti.
+ * A coffee can also multiple add-ins, with a .30 cent surcharge per add-in.
+ *
+ * @author Francisco Marquez
+ */
 public class Coffee extends MenuItem {
+    /**
+     * Size Enum represents the different sizes a coffee can have and the associated price.
+     */
     public enum Size {
-        SHORT, TALL, GRANDE, VENTI;
+        SHORT(1.99), TALL(2.49), GRANDE(2.99), VENTI(3.49);
+
+        double price;
+
+        /**
+         * Constructs a Size Enum
+         * @param price Price for a coffee Size.
+         */
+        Size(double price) {
+            this.price = price;
+        }
+
+        /**
+         * @return A formatted Enum string that capitalizes the first letter.
+         */
         @Override
         public String toString () {
             String string = name().toLowerCase();
             return string.substring(0,1).toUpperCase() + string.substring(1);
         }
-    }
-    public enum AddIns {
-        SWEET_CREAM, FRENCH_VANILLA, IRISH_CREAM, CARAMEL, MOCHA;
 
+        /**
+         * @return the price of a Size Enum.
+         */
+        public double getPrice() {
+            return price;
+        }
+    }
+
+    /**
+     * AddIns Enum represents the different add-ins a coffee can have and the associated price.
+     */
+    public enum AddIns {
+        SWEET_CREAM(.30), FRENCH_VANILLA(.30), IRISH_CREAM(.30), CARAMEL(.30), MOCHA(.30);
+
+        double price;
+        /**
+         * Constructs a AddIns Enum
+         * @param price Price for a coffee add-in.
+         */
+        AddIns(double price) {
+            this.price = price;
+        }
+
+        /**
+         * @return A formatted Enum string that capitalizes the first letter.
+         */
         @Override
         public String toString () {
             String string = name().toLowerCase();
             return string.substring(0,1).toUpperCase() + string.substring(1);
+        }
+
+        /**
+         * @return the price of a AddIns Enum.
+         */
+        public double getPrice() {
+            return price;
         }
     }
 
@@ -29,7 +82,10 @@ public class Coffee extends MenuItem {
     private ObservableList<AddIns> addIns;
     private int quantity;
 
-
+    /**
+     * Constructs a Coffee Object.
+     * The default size is Short, no add-ins, and quantity of 1.
+     */
     public Coffee() {
         this.addIns = FXCollections.observableArrayList();
         quantity = 1;
@@ -37,6 +93,11 @@ public class Coffee extends MenuItem {
         price();
     }
 
+    /**
+     * Copy constructor for a Coffee.
+     * This constructor is used to pass a coffee object from a view, to an order.
+     * @param copy
+     */
     public Coffee(Coffee copy) {
         super(copy);
         this.size = copy.size;
@@ -44,26 +105,35 @@ public class Coffee extends MenuItem {
         this.quantity = copy.quantity;
     }
 
+    /**
+     * Abstract method of Menu Item. Determines the price of a Coffee object.
+     * @return
+     */
     @Override
     public double price () {
-        double price = 1.99; // base price.
-        price += addIns.size() * .30; //30 cents for every add in.
-        switch (size) {
-            case SHORT -> price += 0;
-            case TALL -> price += .50;
-            case GRANDE -> price += 1.00;
-            case VENTI -> price += 1.50;
+        price = size.getPrice();
+        for (AddIns value : addIns) {
+            price += value.getPrice();
         }
         price *= quantity;
         setPrice(price);
         return price;
     }
 
+    /**
+     * Sets the Size of a coffee object.
+     * @param size Size Enum to be set to.
+     */
     public void setSize (Size size) {
         this.size = size;
         price();
     }
 
+    /**
+     * Adds a AddIn enum to the coffee's add-in list.
+     * @param newAddIn AddIns enum to be added.
+     * @return true if successful, false otherwise.
+     */
     public boolean addAddIn(AddIns newAddIn) {
         if (!addIns.contains(newAddIn)) {
             addIns.add(newAddIn);
@@ -73,36 +143,36 @@ public class Coffee extends MenuItem {
         return false;
     }
 
+    /**
+     * Removes a AddIns enum from the coffee's add-in list.
+     * @param removeAddIn AddIns enum to be removed.
+     * @return true if successful, false otherwise.
+     */
     public boolean removeAddIn(AddIns removeAddIn) {
         boolean success = addIns.remove(removeAddIn);
         price();
         return success;
     }
 
+    /**
+     * Sets the quantity of the coffee object.
+     * @param amount quantity amount to be set to.
+     */
     public void setQuantity(int amount){
         quantity = amount;
         price();
     }
 
-    public void reset(){
-        this.quantity = 1;
-        this.size = Size.SHORT;
-        addIns.clear();
-        price();
-    }
-
+    /**
+     * Override and formats a coffee's object toString method.
+     * @return String detailing the quantity, size, and add-ins of a coffee.
+     */
     @Override
     public String toString () {
         String addinString = addIns.isEmpty() ? "None" : addIns.toString();
         return quantity + " " + size + " Coffee Add-Ins: " + addinString + " Total: " + getPriceString();
     }
 
-    public static void main (String[] args) {
 
-        Coffee coffeeTest2 = new Coffee();
-        System.out.println(coffeeTest2.getPriceString());
-
-
-    }
 
 }

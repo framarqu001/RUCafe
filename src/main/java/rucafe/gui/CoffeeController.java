@@ -10,15 +10,16 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.Optional;
 
+/**
+ * This controller handles all the logic and synchronization of the CoffeeView.
+ * A coffee object is tied to this controller and is used for synchronization as the user
+ * navigates the gui.
+ */
 public class CoffeeController {
     private Stage primaryStage;
     private Scene primaryScene;
     private Coffee coffeeOrder = new Coffee();
     private Order currentOrder;
-    private Image small = new Image("file:src/main/resources/rucafe/gui/small.png");
-    private Image medium = new Image("file:src/main/resources/rucafe/gui/medium.png");
-    private Image large = new Image("file:src/main/resources/rucafe/gui/large.png");
-
 
     @FXML
     private CheckBox cb_sweetCream, cb_mocha, cb_frenchVanilla, cb_caramel, cb_IrishCream;
@@ -35,6 +36,11 @@ public class CoffeeController {
     @FXML
     private ChoiceBox<Integer> cb_quantity;
 
+
+    /**
+     * Adds a coffee object to the Order.
+     * Confirms with the user that they want to place the order with an alert.
+     */
     @FXML
     void addToOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -52,6 +58,12 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Prepares the coffeeView to be shown to the user.
+     * Binds text field value with coffee price string property, and sets choice box with values (1,2,3,4,5)
+     * When radio buttons from the toggle group 'size' are selected. The controller's coffee Object
+     * size also changes. The same is true with the choice box 'quantity'.
+     */
     public void initialize() {
         rb_small.setSelected(true);
         tf_total.textProperty().bind(coffeeOrder.priceStringProperty()); // textbox binded to Coffee priceString.
@@ -76,6 +88,9 @@ public class CoffeeController {
         });
     }
 
+    /**
+     * Adds a Caramel addIn to coffee if selected, removes if deselected.
+     */
     @FXML
     void setCaramel() {
         if (cb_caramel.isSelected()) {
@@ -85,6 +100,9 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Adds an Irish Cream addIn to coffee if selected, removes if deselected.
+     */
     @FXML
     void setIrishCream() {
         if (cb_IrishCream.isSelected()) {
@@ -94,6 +112,9 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Adds a Mocha addIn to coffee if selected, removes if deselected.
+     */
     @FXML
     void setMocha() {
         if (cb_mocha.isSelected()) {
@@ -103,6 +124,9 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Adds a Sweet Cream addIn to coffee if selected, removes if deselected.
+     */
     @FXML
     void setSweetCream() {
         if (cb_sweetCream.isSelected()) {
@@ -112,6 +136,9 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Adds a French Vanilla addIn to coffee if selected, removes if deselected.
+     */
     @FXML
     void setFrenchVanilla() {
         if (cb_frenchVanilla.isSelected()) {
@@ -121,24 +148,29 @@ public class CoffeeController {
         }
     }
 
+    /**
+     * Changes the current scene back the primary scene (mainView).
+     */
     @FXML
     protected void displayMain(){
         primaryStage.setScene(primaryScene);
     }
 
-    private void resetCheckBoxes() {
-        cb_frenchVanilla.setSelected(false);
-        cb_sweetCream.setSelected(false);
-        cb_mocha.setSelected(false);
-        cb_caramel.setSelected(false);
-        cb_IrishCream.setSelected(false);
-
-    }
+    /**
+     * Sets the references to the primary stage/scene.
+     * @param stage reference to the primary stage.
+     * @param scene reference to the primary scene.
+     */
     public void setPrimaryStage(Stage stage, Scene scene) {
         primaryStage = stage;
         primaryScene = scene;
     }
 
+    /**
+     * Sets the reference to the current order.
+     * Allows the current order to be passed between different views.
+     * @param order reference to the current order.
+     */
     public void setCurrentOrder(Order order){
         currentOrder = order;
     }
