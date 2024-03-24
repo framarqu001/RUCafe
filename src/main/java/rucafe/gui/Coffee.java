@@ -170,7 +170,7 @@ public class Coffee extends MenuItem {
     @Override
     public String toString () {
         String addinString = addIns.isEmpty() ? "None" : addIns.toString();
-        return quantity + " " + size + " Coffee Add-Ins: " + addinString + " Total: " + getPriceString();
+        return quantity + " " + size + " Coffee Add-Ins: " + addinString + " Price: " + getPriceString();
     }
 
 

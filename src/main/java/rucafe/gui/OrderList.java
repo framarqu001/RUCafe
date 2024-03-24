@@ -14,4 +14,15 @@ public class OrderList {
         orderList.remove(order);
     }
 
+    public void addOrder(Order order) {
+        orderList.add(order);
+    }
+
+    public ObservableList<Order> getOrderList () {
+        return orderList;
+    }
+
+    public boolean isEmpty(){
+        return orderList.isEmpty();
+    }
 }

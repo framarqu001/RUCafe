@@ -25,11 +25,19 @@ public class Order {
      * Constructs an order object.
      */
     public Order() {
-        orderNumber = ++TOTAL_ORDERS;
         this.menuItems = FXCollections.observableArrayList();
-        totalStringProperty = new SimpleStringProperty();
         subTotalStringProperty = new SimpleStringProperty();
+        totalStringProperty = new SimpleStringProperty();
         salesTaxStringProperty = new SimpleStringProperty();
+
+    }
+
+    public Order(Order copyOrder) {
+       this.orderNumber = ++TOTAL_ORDERS;
+       this.total = copyOrder.total;
+       this.totalStringProperty = new SimpleStringProperty();
+       this.totalStringProperty.set(copyOrder.totalStringProperty.get());
+       this.menuItems = FXCollections.observableArrayList(copyOrder.menuItems);
 
     }
 
@@ -84,14 +92,32 @@ public class Order {
         DecimalFormat dcFormat = new DecimalFormat("###.##");
 
         String string = "$" + dcFormat.format(total);
-        this.totalStringProperty.set(string);
+        this.subTotalStringProperty.set(string);
 
         string = "$" + dcFormat.format(total * (1 + SALES_TAX));
-        this.subTotalStringProperty.set(string);
+        this.totalStringProperty.set(string);
 
         string = "$" + dcFormat.format(total * SALES_TAX);
         this.salesTaxStringProperty.set(string);
 
+    }
+
+    public boolean isEmpty() {
+        return menuItems.isEmpty();
+    }
+
+    public void reset() {
+        menuItems.clear();
+        total = 0;
+        DecimalFormat dcFormat = new DecimalFormat("###.##");
+        String string = "$" + dcFormat.format(total);
+        this.totalStringProperty.set(string);
+
+        string = "$" + dcFormat.format(total);
+        this.subTotalStringProperty.set(string);
+
+        string = "$" + dcFormat.format(total);
+        this.salesTaxStringProperty.set(string);
     }
 
     /**
@@ -100,5 +126,10 @@ public class Order {
      */
     public ObservableList<MenuItem> getMenuItems () {
         return menuItems;
+    }
+
+    @Override
+    public String toString () {
+        return  orderNumber + "";
     }
 }

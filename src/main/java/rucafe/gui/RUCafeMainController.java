@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class RUCafeMainController {
     private Stage primaryStage;
@@ -52,7 +54,7 @@ public class RUCafeMainController {
             primaryStage.setScene(scene);
             CurrentOrderController currentOrderController = loader.getController();
             currentOrderController.setPrimaryStage(primaryStage, primaryScene);
-            currentOrderController.setCurrentOrder(currentOrder);
+            currentOrderController.setCurrentOrder(currentOrder, orderList);
 
 
         } catch (IOException e) {
@@ -81,6 +83,34 @@ public class RUCafeMainController {
             alert.setTitle("ERROR");
             alert.setHeaderText("Issue loading Sandwich FXML File");
             alert.setContentText("Could not load or read from " + SANDWICH_FXML_PATH);
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    protected void displayOrderListView() {
+        if (orderList.isEmpty()) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("No orders");
+            warning.setContentText("No orders to show");
+            warning.showAndWait();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ordersView.fxml"));
+            Scene scene = new Scene(loader.load());
+            primaryStage.setScene(scene);
+            OrderListController orderListController = loader.getController();
+            orderListController.setPrimaryStage(primaryStage, primaryScene);
+            orderListController.setOrderList(orderList);
+
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Loading View1.fxml.");
+            alert.setContentText("Couldn't load View1.fxml.");
             alert.showAndWait();
         }
     }

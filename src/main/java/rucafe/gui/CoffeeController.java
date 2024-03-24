@@ -45,7 +45,7 @@ public class CoffeeController {
     void addToOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Order confirmation");
-        alert.setContentText("Do you want to place this order?");
+        alert.setContentText("Add Coffee to the order?");
         Optional<ButtonType> button = alert.showAndWait();
         if (button.get() == ButtonType.OK) {
             Coffee copy = new Coffee(coffeeOrder);
