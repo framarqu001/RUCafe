@@ -8,9 +8,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class RUCafeMainController {
@@ -19,11 +22,22 @@ public class RUCafeMainController {
     private Order currentOrder = new Order();
     private OrderList orderList = new OrderList();
 
-    private final String SANDWICH_FXML_PATH = "sandwichView.fxml";
+    @FXML
+    private ImageView iv_Coffee, iv_Donuts, iv_Sandwich;
+
+    //Image Source: https://lifeboostcoffee.com/blogs/lifeboost/how-many-calories-are-in-a-cup-of-coffee
+    private final String COFFEE_BTN_PATH = "coffeeFP.jpg";
+    //Image Source: https://tornadoughalli.com/club-sandwich-recipe/
+    private final String SANDWICH_BTN_PATH = "sandwichFP.jpg";
+    //Image Source: https://www.duckdonuts.com/
+    private final String DONUTS_BTN_PATH = "donutsFP.jpg";
 
     public void setPrimaryStage(Stage stage, Scene scene) {
         primaryStage = stage;
         primaryScene = scene;
+        iv_Coffee.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(COFFEE_BTN_PATH))));
+        iv_Sandwich.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(SANDWICH_BTN_PATH))));
+        iv_Donuts.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(DONUTS_BTN_PATH))));
     }
 
 

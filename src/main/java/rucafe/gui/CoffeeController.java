@@ -44,8 +44,11 @@ public class CoffeeController {
     @FXML
     void addToOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
         alert.setTitle("Order confirmation");
-        alert.setContentText("Add Coffee to the order?");
+        alert.setHeaderText("");
+        alert.setContentText("Do you want to place this order?");
         Optional<ButtonType> button = alert.showAndWait();
         if (button.get() == ButtonType.OK) {
             Coffee copy = new Coffee(coffeeOrder);

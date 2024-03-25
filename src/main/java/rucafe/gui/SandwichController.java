@@ -2,15 +2,13 @@ package rucafe.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class SandwichController {
     private Stage primaryStage;
@@ -58,11 +56,23 @@ public class SandwichController {
     }
 
     private void successAddSandwich() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Added to Order");
-        alert.setHeaderText("Sandwich added to order");
-        alert.setContentText("Your Sandwich (" + sandwich + ") was successfully added to your order!");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order Status");
+        alert.setHeaderText("");
+        alert.setContentText("Your Sandwich (" + sandwich + ") was successfully added to your cart!");
         alert.showAndWait();
+    }
+
+    private boolean confirmOrder() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+        alert.setTitle("Order confirmation");
+        alert.setHeaderText("");
+        alert.setContentText("Do you want to place this order?");
+
+        Optional<ButtonType> button = alert.showAndWait();
+        return (button.get() == ButtonType.OK);
     }
 
     public void setPrimaryStage(Stage stage, Scene scene) {
@@ -138,13 +148,15 @@ public class SandwichController {
             return;
         }
 
-        Sandwich copy = new Sandwich(sandwich);
-        currentOrder.addToOrder(copy);
-        successAddSandwich();
+        if(confirmOrder()) {
+            Sandwich copy = new Sandwich(sandwich);
+            currentOrder.addToOrder(copy);
+            successAddSandwich();
 
-        sandwich = new Sandwich();
-        tf_price.textProperty().bind(sandwich.priceStringProperty());
-        clear();
+            sandwich = new Sandwich();
+            tf_price.textProperty().bind(sandwich.priceStringProperty());
+            displayMain();
+        }
     }
 
     @FXML
