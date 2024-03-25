@@ -83,8 +83,9 @@ public class RUCafeMainController {
     @FXML
     protected void displaySandwichView(){
 
+        String SandwichFXMLFilePath = "sandwichView.fxml";
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(SANDWICH_FXML_PATH));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(SandwichFXMLFilePath));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
 
@@ -96,10 +97,11 @@ public class RUCafeMainController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Issue loading Sandwich FXML File");
-            alert.setContentText("Could not load or read from " + SANDWICH_FXML_PATH);
+            alert.setContentText("Could not load or read from " + SandwichFXMLFilePath);
             alert.showAndWait();
         }
     }
+
 
     @FXML
     protected void displayOrderListView() {
@@ -110,7 +112,6 @@ public class RUCafeMainController {
             warning.showAndWait();
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ordersView.fxml"));
             Scene scene = new Scene(loader.load());
