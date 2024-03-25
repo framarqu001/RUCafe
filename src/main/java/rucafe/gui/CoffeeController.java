@@ -44,7 +44,10 @@ public class CoffeeController {
     @FXML
     void addToOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
         alert.setTitle("Order confirmation");
+        alert.setHeaderText("");
         alert.setContentText("Do you want to place this order?");
         Optional<ButtonType> button = alert.showAndWait();
         if (button.get() == ButtonType.OK) {
@@ -52,6 +55,7 @@ public class CoffeeController {
             currentOrder.addToOrder(copy);
             Alert confirmAlert = new Alert(Alert.AlertType.INFORMATION);
             confirmAlert.setTitle("Order Status");
+            confirmAlert.setHeaderText("");
             confirmAlert.setContentText("Coffee has been added to cart");
             confirmAlert.showAndWait();
             primaryStage.setScene(primaryScene);
