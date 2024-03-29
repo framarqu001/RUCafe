@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="519.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rucafe.gui.CurrentOrderController">
+<AnchorPane prefHeight="519.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rucafe.gui.CurrentOrderController">
    <children>
       <Button layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#displayMain" text="back" />
       <ListView fx:id="lv_currentOrder" layoutX="118.0" layoutY="118.0" prefHeight="260.0" prefWidth="555.0" />
@@ -23,7 +23,7 @@
                         <Insets top="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="tf_subtotal" prefHeight="26.0" prefWidth="132.0">
+                  <TextField fx:id="tf_subtotal" editable="false" prefHeight="26.0" prefWidth="132.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -40,7 +40,7 @@
                         <Insets top="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="tf_tax" prefHeight="26.0" prefWidth="138.0">
+                  <TextField fx:id="tf_tax" editable="false" prefHeight="26.0" prefWidth="138.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -57,7 +57,7 @@
                         <Insets top="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="tf_total" prefHeight="26.0" prefWidth="135.0">
+                  <TextField fx:id="tf_total" editable="false" prefHeight="26.0" prefWidth="135.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

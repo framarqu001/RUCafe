@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 public class Sandwich extends MenuItem {
 
     /**
-     * Enum meant to represent the types of sandwiches a person can order along with their prices.
+     * Enum meant to represent the proteins of sandwiches a person can order along with their prices.
      */
     enum Protein{
         BEEF(10.99), CHICKEN(8.99), FISH(9.99);
@@ -20,7 +20,7 @@ public class Sandwich extends MenuItem {
         final double price;
 
         /**
-         * Constructor for Sandwich Type, takes in price as parameter
+         * Constructor for Protein, takes in price as parameter
          * @param price the price of the sandwich.
          */
         Protein(double price) {
@@ -35,6 +35,10 @@ public class Sandwich extends MenuItem {
             return this.price;
         }
 
+        /**
+         * Returns a string representing the type of protein and its price.
+         * @return a string with all the information about a protein.
+         */
         @Override
         public String toString() {
             return this.name() + " - $" + price;
@@ -212,7 +216,7 @@ public class Sandwich extends MenuItem {
      * @return the price of the sandwich.
      */
     @Override
-    public double price () {
+    public double price() {
         double price = 0;
         int rounding = 100;
         double proteinPrice = protein != null ? (protein.getPrice() * rounding) : 0;
