@@ -102,6 +102,28 @@ public class RUCafeMainController {
         }
     }
 
+    @FXML
+    protected void displayDonutView(){
+
+        String DonutFXMLFilePath = "donutView.fxml";
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DonutFXMLFilePath));
+            Scene scene = new Scene(loader.load());
+            primaryStage.setScene(scene);
+
+            DonutController dc = loader.getController();
+            dc.setPrimaryStage(primaryStage, primaryScene);
+            dc.setCurrentOrder(currentOrder);
+        }
+        catch(IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Issue loading Donut FXML File");
+            alert.setContentText("Could not load or read from " + DonutFXMLFilePath);
+            alert.showAndWait();
+        }
+    }
+
 
     @FXML
     protected void displayOrderListView() {
