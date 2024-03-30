@@ -52,18 +52,15 @@ public class CurrentOrderController {
 
     @FXML
     public void removeItem() {
-        if (currentOrder.isEmpty()) {
+        
+        ObservableList<MenuItem> menuItems = currentOrder.getMenuItems();
+        int index = lv_currentOrder.getSelectionModel().getSelectedIndex();
+        if (index == -1) {
             Alert warning = new Alert(Alert.AlertType.WARNING);
             warning.setTitle("Remove item");
             warning.setContentText("No items to be removed");
             warning.showAndWait();
             return; // no item to be removed
-        }
-
-        ObservableList<MenuItem> menuItems = currentOrder.getMenuItems();
-        int index = lv_currentOrder.getSelectionModel().getSelectedIndex();
-        if (index == -1) {
-            return; //no item selected
         }
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Remove item");
