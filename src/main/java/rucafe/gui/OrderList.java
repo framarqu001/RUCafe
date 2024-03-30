@@ -40,9 +40,9 @@ public class OrderList {
         for (Order order : orderList) {
             string += "Order: #" + order + "\n";
                 for (MenuItem menuItem : order.getMenuItems()) {
-                    string += "\t" + menuItem;
+                    string += "\t" + menuItem + "\n";
                 }
-                string += "\n";
+                string += "\t" + "Sub-Total: " + order.subTotalStringProperty().get() + "\n\n";
         }
         return string;
     }
