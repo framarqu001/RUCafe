@@ -228,6 +228,7 @@ public class DonutController {
                 currentOrder.addToOrder(donut);
             }
             successAddDonuts();
+            donuts = new DonutBox();
             displayMain();
         }
     }

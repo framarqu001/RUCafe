@@ -105,6 +105,11 @@ public class Coffee extends MenuItem {
         this.quantity = copy.quantity;
     }
 
+    @Override
+    public MenuItem clone() {
+        return new Coffee(this);
+    }
+
     /**
      * Abstract method of Menu Item. Determines the price of a Coffee object.
      * @return

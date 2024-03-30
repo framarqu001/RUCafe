@@ -37,8 +37,7 @@ public class Order {
        this.total = copyOrder.total;
        this.totalStringProperty = new SimpleStringProperty();
        this.totalStringProperty.set(copyOrder.totalStringProperty.get());
-       this.menuItems = FXCollections.observableArrayList(copyOrder.menuItems);
-
+       this.menuItems = FXCollections.observableArrayList(copyMenuItems(copyOrder.menuItems));
     }
 
     /**
@@ -100,6 +99,14 @@ public class Order {
         string = "$" + dcFormat.format(total * SALES_TAX);
         this.salesTaxStringProperty.set(string);
 
+    }
+
+    private static ObservableList<MenuItem> copyMenuItems(ObservableList<MenuItem> menuItems) {
+        ObservableList<MenuItem> copy = FXCollections.observableArrayList();
+        for (MenuItem item : menuItems) {
+            copy.add(item.clone());
+        }
+        return copy;
     }
 
     public boolean isEmpty() {

@@ -24,6 +24,8 @@ abstract public class MenuItem {
 
     public abstract double price();
 
+    public abstract MenuItem clone();
+
     public double getPrice () {
         return price;
     }

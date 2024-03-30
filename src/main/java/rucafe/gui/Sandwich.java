@@ -213,6 +213,11 @@ public class Sandwich extends MenuItem {
         return protein == null || bread == null;
     }
 
+    @Override
+    public MenuItem clone() {
+        return new Sandwich(this);
+    }
+
     /**
      * Returns the price of the sandwich based on the protein and the extra add-ons
      * @return the price of the sandwich.

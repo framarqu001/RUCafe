@@ -55,7 +55,7 @@ public class CoffeeController {
             currentOrder.addToOrder(copy);
             Alert confirmAlert = new Alert(Alert.AlertType.INFORMATION);
             confirmAlert.setTitle("Order Status");
-            alert.setHeaderText("");
+            confirmAlert.setHeaderText("");
             confirmAlert.setContentText("Coffee has been added to cart");
             confirmAlert.showAndWait();
             primaryStage.setScene(primaryScene);

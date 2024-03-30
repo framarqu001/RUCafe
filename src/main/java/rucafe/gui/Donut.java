@@ -143,6 +143,11 @@ public class Donut extends MenuItem {
     }
 
     @Override
+    public MenuItem clone() {
+        return new Donut(this);
+    }
+
+    @Override
     public String toString() {
         if(!isIncomplete()) {
             DecimalFormat df = new DecimalFormat("#####.##");

@@ -20,6 +20,11 @@ public class DonutBox extends MenuItem{
         return price;
     }
 
+    @Override
+    public MenuItem clone() {
+        return null;
+    }
+
     public void removeDonut(Donut donut) {
         donuts.remove(donut);
         setPrice(price());

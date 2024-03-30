@@ -82,6 +82,7 @@ public class CurrentOrderController {
             currentOrder.reset();
             Alert confirmAlert = new Alert(Alert.AlertType.INFORMATION);
             confirmAlert.setTitle("Order");
+            confirmAlert.setHeaderText("");
             confirmAlert.setContentText("Order has been placed");
             confirmAlert.showAndWait();
             primaryStage.setScene(primaryScene);
