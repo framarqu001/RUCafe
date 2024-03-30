@@ -10,11 +10,11 @@ public class OrderList {
         this.orderList = FXCollections.observableArrayList();
     }
 
-    public void removeOrder(Order order) {
+    public void removeOrder (Order order) {
         orderList.remove(order);
     }
 
-    public void addOrder(Order order) {
+    public void addOrder (Order order) {
         orderList.add(order);
     }
 
@@ -22,7 +22,28 @@ public class OrderList {
         return orderList;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty () {
         return orderList.isEmpty();
+    }
+
+    public int findByID (int id) {
+        for (Order element : orderList) {
+            if (element.getID() == id) {
+                return element.getID();
+            }
+        }
+        return -1;
+    }
+
+    public String printOrders() {
+        String string = "";
+        for (Order order : orderList) {
+            string += "Order: #" + order + "\n";
+                for (MenuItem menuItem : order.getMenuItems()) {
+                    string += "\t" + menuItem;
+                }
+                string += "\n";
+        }
+        return string;
     }
 }

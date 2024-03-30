@@ -35,8 +35,8 @@ public class Order {
     public Order(Order copyOrder) {
        this.orderNumber = ++TOTAL_ORDERS;
        this.total = copyOrder.total;
-       this.totalStringProperty = new SimpleStringProperty();
-       this.totalStringProperty.set(copyOrder.totalStringProperty.get());
+       this.subTotalStringProperty = new SimpleStringProperty();
+       this.subTotalStringProperty.set(copyOrder.subTotalStringProperty.get());
        this.menuItems = FXCollections.observableArrayList(copyMenuItems(copyOrder.menuItems));
     }
 
@@ -134,6 +134,11 @@ public class Order {
     public ObservableList<MenuItem> getMenuItems () {
         return menuItems;
     }
+
+    public int getID () {
+        return TOTAL_ORDERS;
+    }
+
 
     @Override
     public String toString () {

@@ -52,17 +52,23 @@ public class CurrentOrderController {
 
     @FXML
     public void removeItem() {
-        if (currentOrder.isEmpty()) return; // no item to be removed
+        if (currentOrder.isEmpty()) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Remove item");
+            warning.setContentText("No items to be removed");
+            warning.showAndWait();
+            return; // no item to be removed
+        }
 
         ObservableList<MenuItem> menuItems = currentOrder.getMenuItems();
         int index = lv_currentOrder.getSelectionModel().getSelectedIndex();
         if (index == -1) {
             return; //no item selected
         }
-        Alert warning = new Alert(Alert.AlertType.WARNING);
-        warning.setTitle("Remove item");
-        warning.setContentText("Are you sure you want to remove:\n " + menuItems.get(index));
-        Optional<ButtonType> button = warning.showAndWait();
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Remove item");
+        confirmation.setContentText("Are you sure you want to remove:\n " + menuItems.get(index));
+        Optional<ButtonType> button = confirmation.showAndWait();
         if (button.get() == ButtonType.OK) {
             currentOrder.removeFromOrder(menuItems.get(index));
 
@@ -71,7 +77,14 @@ public class CurrentOrderController {
 
     @FXML
     public void placeOrder() {
-        if (currentOrder.isEmpty()) return;
+        if (currentOrder.isEmpty()) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Place order");
+            warning.setContentText("No items in current order");
+            warning.showAndWait();
+            return; // no item to be removed
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Order confirmation");
         alert.setContentText("Place this order?");
