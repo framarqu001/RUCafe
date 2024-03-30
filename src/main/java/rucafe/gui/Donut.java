@@ -139,7 +139,7 @@ public class Donut extends MenuItem {
     public double price() {
         int rounding = 100;
         double price = type.getPrice() * rounding;
-        return (price / rounding) * quantity;
+        return (price * quantity) / rounding;
     }
 
     @Override
@@ -150,8 +150,7 @@ public class Donut extends MenuItem {
     @Override
     public String toString() {
         if(!isIncomplete()) {
-            DecimalFormat df = new DecimalFormat("#####.##");
-            return getDonutText() + " quantity (" + quantity + ") - $" + df.format(price);
+            return getDonutText() + " quantity (" + quantity + ") - $" + price;
         }
         return "incomplete donut";
     }

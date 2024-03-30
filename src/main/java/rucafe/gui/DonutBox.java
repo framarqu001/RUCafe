@@ -41,6 +41,35 @@ public class DonutBox extends MenuItem{
         setPrice(price());
     }
 
+    public void setPendingDonut(Donut donut){
+        this.pendingDonut = donut;
+        setPrice(price());
+    }
+
+    public Donut getPendingDonut(){
+        return this.pendingDonut;
+    }
+
+    public boolean addPendingDonut() {
+        if(pendingDonut != null && !(pendingDonut.isIncomplete())) {
+            Donut copy = (Donut)pendingDonut.clone();
+            addDonut(copy);
+            clearPendingDonut();
+            setPrice(price());
+            return true;
+        }
+        return false;
+    }
+
+    public void clearPendingDonut() {
+        this.pendingDonut = null;
+        setPrice(price());
+    }
+
+    public boolean hasPendingDonut() {
+        return pendingDonut != null;
+    }
+
     public ObservableList<Donut> getDonutList () {
         return donuts;
     }

@@ -60,9 +60,14 @@ public class DonutController {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 MIN_QUANTITY,
                 MAX_QUANTITY));
+        sp_quantity.valueProperty().addListener((obj, previousValue, newValue) ->
+            {setQuantity();});
 
         currentDonuts = new Donut(getType(), sp_quantity.getValue());
+
+
         donuts = new DonutBox();
+        donuts.setPendingDonut(new Donut(getType(), sp_quantity.getValue()));
 
         tf_price.textProperty().bind(donuts.priceStringProperty());
 
@@ -137,6 +142,18 @@ public class DonutController {
         alert.showAndWait();
     }
 
+    public boolean alertAddPendingDonutToBox() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Add");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Discard");
+        alert.setTitle("Current donut not yet added to box");
+        alert.setHeaderText("");
+        alert.setContentText("Current donut not yet added to your box, would you like to add or discard?");
+
+        Optional<ButtonType> button = alert.showAndWait();
+        return (button.get() == ButtonType.OK);
+    }
+
     private boolean confirmOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
@@ -173,16 +190,35 @@ public class DonutController {
         currentOrder = order;
     }
 
+    public void setQuantity() {
+        if(!(donuts.hasPendingDonut())) {
+            donuts.setPendingDonut(new Donut(getType(), sp_quantity.getValue()));
+            if(cmb_flavor.valueProperty().getValue() != null)
+                setFlavor();
+        }
+
+        donuts.getPendingDonut().setQuantity(sp_quantity.getValue());
+        donuts.setPrice(donuts.price());
+    }
+
     @FXML
     private void setFlavor() {
-        currentDonuts.setFlavor(cmb_flavor.getValue());
+        if(!(donuts.hasPendingDonut()))
+            donuts.setPendingDonut(new Donut(getType(),sp_quantity.getValue()));
+
+        donuts.getPendingDonut().setFlavor(cmb_flavor.getValue());
     }
 
     @FXML
     public void changeDonutType() {
         setFlavors();
         setDonutImage();
-        currentDonuts.setType(getType());
+
+        if(!(donuts.hasPendingDonut()))
+            donuts.setPendingDonut(new Donut(getType(),sp_quantity.getValue()));
+
+        donuts.getPendingDonut().setType(getType());
+        donuts.setPrice(donuts.price());
     }
 
     @FXML
@@ -194,15 +230,18 @@ public class DonutController {
 
     @FXML
     public void addToBox() {
-        if(currentDonuts.isIncomplete()) {
-            alertIncompleteDonut();
-            return;
+        if(!(donuts.hasPendingDonut()) || donuts.getPendingDonut().isIncomplete()) {
+            if(cmb_flavor.valueProperty().getValue() == null) {
+                alertIncompleteDonut();
+                return;
+            }
+            setFlavor();
         }
 
-        currentDonuts.setQuantity(sp_quantity.getValue());
-        Donut donut = new Donut(currentDonuts);
-        donuts.addDonut(donut);
+        donuts.getPendingDonut().setQuantity(sp_quantity.getValue());
+        donuts.addPendingDonut();
         sp_quantity.getValueFactory().setValue(MIN_QUANTITY);
+        donuts.clearPendingDonut();
     }
 
     @FXML
@@ -219,6 +258,14 @@ public class DonutController {
     public void addBoxToOrder() {
         if(donuts.isEmpty()) {
             alertAddDonutToBox();
+            return;
+        }
+
+        if(donuts.hasPendingDonut() && !(donuts.getPendingDonut().isIncomplete())) {
+            if(alertAddPendingDonutToBox())
+                donuts.addPendingDonut();
+
+            donuts.clearPendingDonut();
             return;
         }
 
