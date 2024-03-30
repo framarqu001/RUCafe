@@ -4,7 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class DonutBox extends MenuItem{
-    ObservableList<Donut> donuts;
+    private ObservableList<Donut> donuts;
+    private Donut pendingDonut;
 
     public DonutBox () {
         this.donuts = FXCollections.observableArrayList();
@@ -14,6 +15,11 @@ public class DonutBox extends MenuItem{
     @Override
     public double price() {
         double price = 0;
+
+        if (pendingDonut != null) {
+            price += pendingDonut.getPrice();
+        }
+
         for (Donut donut: donuts) {
             price += donut.price();
         }
