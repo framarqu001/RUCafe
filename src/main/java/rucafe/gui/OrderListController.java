@@ -91,7 +91,7 @@ public class OrderListController {
     public void exportOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Order confirmation");
-        alert.setContentText("Place this order?");
+        alert.setContentText("Export these orders?");
         Optional<ButtonType> button = alert.showAndWait();
         if (button.get() == ButtonType.OK) {
             FileChooser chooser = new FileChooser();
