@@ -3,18 +3,14 @@ package rucafe.gui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class DonutController {
 
@@ -58,7 +54,7 @@ public class DonutController {
         primaryScene = scene;
 
         setDonutImage();
-        setFlavor();
+        setFlavors();
 
         sp_quantity.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -69,6 +65,11 @@ public class DonutController {
         donuts = new DonutBox();
 
         tf_price.textProperty().bind(donuts.priceStringProperty());
+
+        tc_donut.setCellValueFactory(new PropertyValueFactory<>("donutText"));
+        tc_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        ObservableList<Donut> donutList = donuts.getDonutList();
+        tv_donuts.setItems(donutList);
     }
 
     private void setDonutImage() {
@@ -96,7 +97,7 @@ public class DonutController {
         iv_donut.setImage(img_Donut);
     }
 
-    private void setFlavor() {
+    private void setFlavors() {
         cmb_flavor.setItems(getType().getFlavors());
     }
 
@@ -112,20 +113,123 @@ public class DonutController {
         }
     }
 
+    private void alertIncompleteDonut() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Unfinished Order");
+        alert.setHeaderText("Flavor Not Selected");
+        alert.setContentText("Please choose a donut flavor to add to your box.");
+        alert.showAndWait();
+    }
+
+    private void alertSelectToBeRemoveDonut() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("No Selection Made");
+        alert.setHeaderText("");
+        alert.setContentText("Please select donuts to remove them from your box.");
+        alert.showAndWait();
+    }
+
+    private void alertAddDonutToBox() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Donut Box Empty");
+        alert.setHeaderText("");
+        alert.setContentText("Please add your donuts to your box before placing your order.");
+        alert.showAndWait();
+    }
+
+    private boolean confirmOrder() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+        alert.setTitle("Order confirmation");
+        alert.setHeaderText("");
+        alert.setContentText("Do you want to place this order?");
+
+        Optional<ButtonType> button = alert.showAndWait();
+        return (button.get() == ButtonType.OK);
+    }
+
+    private boolean confirmLeave() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
+        alert.setTitle("Order not placed");
+        alert.setHeaderText("");
+        alert.setContentText("There are still donuts in your box, are you sure you want to leave the page?");
+
+        Optional<ButtonType> button = alert.showAndWait();
+        return (button.get() == ButtonType.OK);
+    }
+
+    private void successAddDonuts() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order Status");
+        alert.setHeaderText("");
+        alert.setContentText("Your Donut Box was successfully added to your cart!");
+        alert.showAndWait();
+    }
+
     public void setCurrentOrder(Order order){
         currentOrder = order;
     }
 
     @FXML
+    private void setFlavor() {
+        currentDonuts.setFlavor(cmb_flavor.getValue());
+    }
+
+    @FXML
     public void changeDonutType() {
-        setFlavor();
+        setFlavors();
         setDonutImage();
         currentDonuts.setType(getType());
     }
 
     @FXML
     protected void displayMain() {
+        if(!(donuts.isEmpty()) && !(confirmLeave()))
+            return;
         primaryStage.setScene(primaryScene);
+    }
+
+    @FXML
+    public void addToBox() {
+        if(currentDonuts.isIncomplete()) {
+            alertIncompleteDonut();
+            return;
+        }
+
+        currentDonuts.setQuantity(sp_quantity.getValue());
+        Donut donut = new Donut(currentDonuts);
+        donuts.addDonut(donut);
+        sp_quantity.getValueFactory().setValue(MIN_QUANTITY);
+    }
+
+    @FXML
+    public void removeFromBox() {
+        Donut donut = tv_donuts.getSelectionModel().getSelectedItem();
+        if(donut == null) {
+            alertSelectToBeRemoveDonut();
+            return;
+        }
+        donuts.removeDonut(donut);
+    }
+
+    @FXML
+    public void addBoxToOrder() {
+        if(donuts.isEmpty()) {
+            alertAddDonutToBox();
+            return;
+        }
+
+        if(confirmOrder()) {
+            ObservableList<Donut> donutOrder = donuts.getDonutList();
+            for(Donut donut: donutOrder){
+                currentOrder.addToOrder(donut);
+            }
+            successAddDonuts();
+            displayMain();
+        }
     }
 
 }

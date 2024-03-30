@@ -149,12 +149,8 @@ public class SandwichController {
         }
 
         if(confirmOrder()) {
-            Sandwich copy = new Sandwich(sandwich);
-            currentOrder.addToOrder(copy);
+            currentOrder.addToOrder(sandwich);
             successAddSandwich();
-
-            sandwich = new Sandwich();
-            tf_price.textProperty().bind(sandwich.priceStringProperty());
             displayMain();
         }
     }

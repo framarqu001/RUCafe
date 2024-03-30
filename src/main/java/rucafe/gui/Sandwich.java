@@ -3,6 +3,8 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.text.DecimalFormat;
+
 /**
  * Class meant to represent a sandwich for a cafe software, extends MenuItem.
  * Sandwiches can be either Beef ($10.99), Chicken ($8.99) or Fish ($9.99) with a selection of three kinds of
@@ -231,8 +233,9 @@ public class Sandwich extends MenuItem {
      */
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#####.##");
         return "Protein: " + protein.name().toLowerCase() + " Bread: " + bread.toString().toLowerCase() + " Add-Ins: "
-                + addOnsString() + " Price: $" + price;
+                + addOnsString() + " Price: $" + df.format(price);
     }
 
     /**

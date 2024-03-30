@@ -3,6 +3,8 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.text.DecimalFormat;
+
 public class Donut extends MenuItem {
 
     /**
@@ -84,9 +86,17 @@ public class Donut extends MenuItem {
     private Flavor flavor;
     private int quantity;
 
+
     public Donut (Type type, int quantity) {
         this.type = type;
         this.quantity = quantity;
+        setPrice(price());
+    }
+
+    public Donut(Donut donut){
+        this.flavor = donut.flavor;
+        this.type = donut.type;
+        this.quantity = donut.quantity;
         setPrice(price());
     }
 
@@ -104,18 +114,50 @@ public class Donut extends MenuItem {
         setPrice(price());
     }
 
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public String getDonutText() {
+        if(!isIncomplete()) {
+            String donut = (type == Type.HOLE) ? "donut " + type.name().toLowerCase() : type.name().toLowerCase()
+                    + " donut";
+            return flavor.name.toLowerCase() + " " + donut;
+        }
+        return "incomplete donut";
+    }
+
     /**
      * Determines if a donut does not have its flavor set.
      * @return true if flavor is null, false otherwise.
      */
     public boolean isIncomplete() {
-        return type == null;
+        return flavor == null;
     }
 
     @Override
-    public double price () {
+    public double price() {
         int rounding = 100;
         double price = type.getPrice() * rounding;
         return (price / rounding) * quantity;
     }
+
+    @Override
+    public String toString() {
+        if(!isIncomplete()) {
+            DecimalFormat df = new DecimalFormat("#####.##");
+            return getDonutText() + " quantity (" + quantity + ") - $" + df.format(price);
+        }
+        return "incomplete donut";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Donut) {
+            Donut donut = (Donut) o;
+            return this.flavor == donut.flavor && this.type == donut.type && this.quantity == donut.quantity;
+        }
+        return false;
+    }
+
 }
