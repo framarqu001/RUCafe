@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 /**
  * Order class represents a unique order comprised of menu Items in RUCafe.
  * User can add and remove menu items from an order.
+ *
  */
 public class Order {
     private static int TOTAL_ORDERS = 0;
@@ -32,6 +33,11 @@ public class Order {
 
     }
 
+    /**
+     * Copy constructor for an Order.
+     * This constructor is used to pass an order from OrderController Class to an OrderList object.
+     * @param copyOrder the copyOrder to be cloned.
+     */
     public Order(Order copyOrder) {
        this.orderNumber = ++TOTAL_ORDERS;
        this.total = copyOrder.total;
@@ -101,6 +107,11 @@ public class Order {
 
     }
 
+    /**
+     * Helper method to clone an order. Creates cloned Menu Items to be added to a cloned Order.
+     * @param menuItems Menu Items to be cloned.
+     * @return a new observable list of menu items with cloned menu items.
+     */
     private static ObservableList<MenuItem> copyMenuItems(ObservableList<MenuItem> menuItems) {
         ObservableList<MenuItem> copy = FXCollections.observableArrayList();
         for (MenuItem item : menuItems) {
@@ -109,17 +120,22 @@ public class Order {
         return copy;
     }
 
+    /**
+     * @return true if the order contains no menu items, false otherwise.
+     */
     public boolean isEmpty() {
         return menuItems.isEmpty();
     }
 
+    /**
+     * Resets an Order to its default values when constructed.
+     */
     public void reset() {
         menuItems.clear();
         total = 0;
         DecimalFormat dcFormat = new DecimalFormat("###.##");
         String string = "$" + dcFormat.format(total);
         this.totalStringProperty.set(string);
-
         string = "$" + dcFormat.format(total);
         this.subTotalStringProperty.set(string);
 
@@ -135,11 +151,17 @@ public class Order {
         return menuItems;
     }
 
+    /**
+     * @return the ID number of the Order.
+     */
     public int getID () {
         return TOTAL_ORDERS;
     }
 
 
+    /**
+     * @return Formatted String of an order only showing its order number.
+     */
     @Override
     public String toString () {
         return  orderNumber + "";

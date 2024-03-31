@@ -13,27 +13,30 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
+/**
+ * OrderListController handles all view logic for the orders placed in RUCafe.
+ * Users can Remove an order from the system, or export the orders to a file.
+ *
+ * @author  Francisco Marquez
+ */
 public class OrderListController {
     private Stage primaryStage;
     private Scene primaryScene;
     private OrderList orderList;
 
-
     @FXML
     ListView<MenuItem> lv_orders;
-
     @FXML
     ChoiceBox<Order> cb_orderNumbers;
-
     @FXML
     TextField tf_subTotal;
 
-
-    public void setPrimaryStage(Stage stage, Scene scene) {
-        primaryStage = stage;
-        primaryScene = scene;
-    }
-
+    /**
+     * Retrieves the reference to OrderList from the main view.
+     * Sets the items of the choice box with the list of Orders and adds a listener to the choice box.
+     * The listener sets the list view to display the contents of the order selected from the choice box.
+     * @param orderList The orderList containing all orders placed in RUCafe.
+     */
     public void setOrderList(OrderList orderList) {
         this.orderList = orderList;
         if (orderList.isEmpty()) return;
@@ -49,10 +52,14 @@ public class OrderListController {
         cb_orderNumbers.setValue(orderList.getOrderList().getLast());
     }
 
+
+    /**
+     * Removes an order from the OrderList.
+     * Confirms with the user before removing the order.
+     */
     @FXML
     public void removeOrder() {
         if (orderList.isEmpty()) return;
-
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Remove item");
         confirmation.setContentText("Are you sure you want to remove order #: " + cb_orderNumbers.getValue());
@@ -77,14 +84,29 @@ public class OrderListController {
             }
             cb_orderNumbers.setValue(orderList.getOrderList().getLast());
         }
-
     }
 
+    /**
+     * Changes the current scene back the primary scene (mainView).
+     */
     @FXML
     protected void displayMain(){
         primaryStage.setScene(primaryScene);
     }
 
+    /**
+     * Sets the references to the primary stage/scene.
+     * @param stage reference to the primary stage.
+     * @param scene reference to the primary scene.
+     */
+    public void setPrimaryStage(Stage stage, Scene scene) {
+        primaryStage = stage;
+        primaryScene = scene;
+    }
+
+    /**
+     * Exports all the orders in orderList to a .txt file displaying all the information shown on the gui.
+     */
     @FXML
     public void exportOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

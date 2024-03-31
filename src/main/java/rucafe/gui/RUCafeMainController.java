@@ -32,6 +32,12 @@ public class RUCafeMainController {
     //Image Source: https://www.duckdonuts.com/
     private final String DONUTS_BTN_PATH = "donutsFP.jpg";
 
+    /**
+     * Sets the references to the primary stage/scene.
+     * This allows for navigation between the views.
+     * @param stage reference to the primary stage.
+     * @param scene reference to the primary scene.
+     */
     public void setPrimaryStage(Stage stage, Scene scene) {
         primaryStage = stage;
         primaryScene = scene;
@@ -41,6 +47,10 @@ public class RUCafeMainController {
     }
 
 
+    /**
+     * Try's to load coffeeView and set the scene. Catches an IOException if the view could not be loaded.
+     * Passes references to the current order and the primary stage/scene.
+     */
     @FXML
     protected void displayCoffeeView() {
         try {
@@ -60,6 +70,10 @@ public class RUCafeMainController {
         }
     }
 
+    /**
+     * Try's to load currentOrderView and set the scene. Catches an IOException if the view could not be loaded.
+     * Passes references to the current order, orderList and the primary stage/scene.
+     */
     @FXML
     protected void displayCurrentOrderView() {
         try {
@@ -80,6 +94,10 @@ public class RUCafeMainController {
         }
     }
 
+    /**
+     * Try's to load sandwichView and set the scene. Catches an IOException if the view could not be loaded.
+     * Passes references to the current order and the primary stage/scene.
+     */
     @FXML
     protected void displaySandwichView(){
 
@@ -102,6 +120,11 @@ public class RUCafeMainController {
         }
     }
 
+
+    /**
+     * Try's to load donutView and set the scene. Catches an IOException if the view could not be loaded.
+     * Passes references to the current order and the primary stage/scene.
+     */
     @FXML
     protected void displayDonutView(){
 
@@ -125,6 +148,11 @@ public class RUCafeMainController {
     }
 
 
+    /**
+     * Try's to load ordersView and set the scene. Catches an IOException if the view could not be loaded.
+     * Passes references to orderList and the primary stage/scene.
+     * Does not allow the user to navigate to the scene if no orders have been placed.
+     */
     @FXML
     protected void displayOrderListView() {
         if (orderList.isEmpty()) {

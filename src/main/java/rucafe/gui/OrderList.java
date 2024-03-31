@@ -3,38 +3,53 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The OrderList class contains a list of all the orders placed in RUCafe.
+ */
 public class OrderList {
     ObservableList<Order> orderList;
 
+    /**
+     * Constructs an OrderList with a new Observable Array List.
+     */
     public OrderList () {
         this.orderList = FXCollections.observableArrayList();
     }
 
+    /**
+     * Removes an order from the list.
+     * @param order order to be removed.
+     */
     public void removeOrder (Order order) {
         orderList.remove(order);
     }
 
+    /**
+     * Adds an order to the list.
+     * @param order order to be added.
+     */
     public void addOrder (Order order) {
         orderList.add(order);
     }
 
+    /**
+     * @return The list of orders held by OrderList
+     */
     public ObservableList<Order> getOrderList () {
         return orderList;
     }
 
+    /**
+     * @return True if order list is empty, false otehrwise.
+     */
     public boolean isEmpty () {
         return orderList.isEmpty();
     }
 
-    public int findByID (int id) {
-        for (Order element : orderList) {
-            if (element.getID() == id) {
-                return element.getID();
-            }
-        }
-        return -1;
-    }
-
+    /**
+     * Formats each order in the list to display the order #, details of each menu item, and subtotal.
+     * @return A formatted String to be written to a file.
+     */
     public String printOrders() {
         String string = "";
         for (Order order : orderList) {

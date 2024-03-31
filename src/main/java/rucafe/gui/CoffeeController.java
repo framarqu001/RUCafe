@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 /**
- * This controller handles all the logic and synchronization of the CoffeeView.
+ * This controller handles all the view logic and synchronization of the CoffeeView.
  * A coffee object is tied to this controller and is used for synchronization as the user
  * navigates the gui.
+ *
+ * @author Francisco Marquez
  */
 public class CoffeeController {
     private Stage primaryStage;

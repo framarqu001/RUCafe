@@ -96,7 +96,7 @@ public class Coffee extends MenuItem {
     /**
      * Copy constructor for a Coffee.
      * This constructor is used to pass a coffee object from a view, to an order.
-     * @param copy
+     * @param copy The coffee object to be cloned.
      */
     public Coffee(Coffee copy) {
         super(copy);
