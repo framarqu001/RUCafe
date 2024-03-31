@@ -213,6 +213,10 @@ public class Sandwich extends MenuItem {
         return protein == null || bread == null;
     }
 
+    /**
+     * Returns a copy of the sandwich object.
+     * @return a copy of the sandwich object.
+     */
     @Override
     public MenuItem clone() {
         return new Sandwich(this);

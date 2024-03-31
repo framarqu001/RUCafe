@@ -3,8 +3,14 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.text.DecimalFormat;
-
+/**
+ * Class meant to represent donuts for a cafe software, extends MenuItem.
+ * Donuts can be either Yeast ($1.79), Cake ($1.89) or Holes ($0.39).
+ * Yeast donuts come in the flavors: Jelly, Apple Cider, Boston Cream, Chocolate, Powdered, Glazed
+ * Cake donuts come in the flavors: Vanilla, Pink Frosted, Funfetti
+ * Donut Holes comes in the flavors: Chocolate, Powdered, Glazed
+ * There is also a quantity of donuts.
+ */
 public class Donut extends MenuItem {
 
     /**
@@ -87,12 +93,21 @@ public class Donut extends MenuItem {
     private int quantity;
 
 
+    /**
+     * Constructor for a donut, takes in a type of donut and the quantity of them.
+     * @param type the type of donut
+     * @param quantity the quantity of donuts.
+     */
     public Donut (Type type, int quantity) {
         this.type = type;
         this.quantity = quantity;
         setPrice(price());
     }
 
+    /**
+     * Clone constructor for a donut, takes in a donut object and makes an identical one.
+     * @param donut the donut to be copied.
+     */
     public Donut(Donut donut){
         this.flavor = donut.flavor;
         this.type = donut.type;
@@ -100,24 +115,45 @@ public class Donut extends MenuItem {
         setPrice(price());
     }
 
+    /**
+     * Given a new donut type, changes the donut to that type.
+     * @param type the type the donut will be changed to.
+     */
     public void setType(Type type) {
         this.type = type;
         setPrice(price());
     }
 
+    /**
+     * Given a flavor, sets the flavor of the donut to that.
+     * @param flavor the new flavor of the donut.
+     */
     public void setFlavor(Flavor flavor) {
         this.flavor = flavor;
     }
 
+    /**
+     * Given a quantity, sets the quantity of the donut to that value.
+     * @param quantity the new quantity of the donut.
+     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
         setPrice(price());
     }
 
+    /**
+     * Returns the quantity of the donut
+     * @return the quantity of the donut.
+     */
     public int getQuantity() {
         return this.quantity;
     }
 
+    /**
+     * Returns a string representing all attributes of a donut except for its price.
+     * @return a string representing all attributes of a donut except for its price, returns incomplete donut
+     * if donut has null attributes.
+     */
     public String getDonutText() {
         if(!isIncomplete()) {
             String donut = (type == Type.HOLE) ? "donut " + type.name().toLowerCase() : type.name().toLowerCase()
@@ -135,6 +171,10 @@ public class Donut extends MenuItem {
         return flavor == null;
     }
 
+    /**
+     * Calculates the price of the donuts depending on their attributes.
+     * @return the price of the donuts.
+     */
     @Override
     public double price() {
         int rounding = 100;
@@ -142,26 +182,25 @@ public class Donut extends MenuItem {
         return (price * quantity) / rounding;
     }
 
+    /**
+     * Returns a copy of the donut object.
+     * @return a copy of the donut object.
+     */
     @Override
     public MenuItem clone() {
         return new Donut(this);
     }
 
+    /**
+     * Returns a string representing all attributes of a donut.
+     * @return a string representing all attributes of a donut, returns incomplete donut if donut has null attributes.
+     */
     @Override
     public String toString() {
         if(!isIncomplete()) {
             return getDonutText() + " quantity (" + quantity + ") - $" + price;
         }
         return "incomplete donut";
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof Donut) {
-            Donut donut = (Donut) o;
-            return this.flavor == donut.flavor && this.type == donut.type && this.quantity == donut.quantity;
-        }
-        return false;
     }
 
 }
