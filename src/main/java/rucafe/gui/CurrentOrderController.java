@@ -52,7 +52,7 @@ public class CurrentOrderController {
 
     @FXML
     public void removeItem() {
-        
+
         ObservableList<MenuItem> menuItems = currentOrder.getMenuItems();
         int index = lv_currentOrder.getSelectionModel().getSelectedIndex();
         if (index == -1) {

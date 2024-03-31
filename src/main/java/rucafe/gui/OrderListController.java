@@ -53,10 +53,10 @@ public class OrderListController {
     public void removeOrder() {
         if (orderList.isEmpty()) return;
 
-        Alert warning = new Alert(Alert.AlertType.WARNING);
-        warning.setTitle("Remove item");
-        warning.setContentText("Are you sure you want to remove order #: " + cb_orderNumbers.getValue());
-        Optional<ButtonType> button = warning.showAndWait();
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Remove item");
+        confirmation.setContentText("Are you sure you want to remove order #: " + cb_orderNumbers.getValue());
+        Optional<ButtonType> button = confirmation.showAndWait();
         if (button.get() == ButtonType.OK) {
             orderList.removeOrder(cb_orderNumbers.getValue());
             Alert confirmAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -76,9 +76,7 @@ public class OrderListController {
                 return;
             }
             cb_orderNumbers.setValue(orderList.getOrderList().getLast());
-
         }
-
 
     }
 
