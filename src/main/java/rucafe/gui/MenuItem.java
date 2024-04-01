@@ -85,7 +85,7 @@ abstract public class MenuItem {
      * @return A formatted String reflecting the menu item's price in format $xx.xx.
      */
     @Override
-    public String toString () {
+    public String toString() {
         return "$" + new DecimalFormat("###.##").format(getPrice());
     }
 

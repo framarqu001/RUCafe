@@ -250,14 +250,6 @@ public class Sandwich extends MenuItem {
     }
 
     /**
-     * Returns an observable list containing all the add-on values.
-     * @return an observable list containing all the add-on values.
-     */
-    public static ObservableList<AddOn> getSandwichAddOnList(){
-        return FXCollections.observableArrayList(AddOn.values());
-    }
-
-    /**
      * Returns an observable list containing all the bread values.
      * @return an observable list containing all the bread values.
      */
