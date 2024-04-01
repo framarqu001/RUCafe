@@ -3,8 +3,6 @@ package rucafe.gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 /**
  * The Coffee class represents a coffee as part of an order of Menu Items.
  * A coffee has to have a size of Short, Tall, Grande, or Venti.

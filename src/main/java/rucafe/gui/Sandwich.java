@@ -10,6 +10,8 @@ import java.text.DecimalFormat;
  * Sandwiches can be either Beef ($10.99), Chicken ($8.99) or Fish ($9.99) with a selection of three kinds of
  * bread: Sourdough, Bagel, Wheat. Customer can add-on Lettuce, Tomatoes, Onions and/Cheese for an extra charge.
  * ($0.30 for veggies and $1.00 for cheese)
+ *
+ * @author Ashley Berlinski
  */
 public class Sandwich extends MenuItem {
 

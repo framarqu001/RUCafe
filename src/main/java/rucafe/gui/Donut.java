@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
  * Cake donuts come in the flavors: Vanilla, Pink Frosted, Funfetti
  * Donut Holes comes in the flavors: Chocolate, Powdered, Glazed
  * There is also a quantity of donuts.
+ *
+ * @author Ashley Berlinski
  */
 public class Donut extends MenuItem {
 

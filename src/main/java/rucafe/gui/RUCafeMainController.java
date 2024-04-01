@@ -4,18 +4,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Optional;
 
+/**
+ * Primary controller for the RU Cafe main view, allows users to navigate to the sandwich/coffee/sandwich order page,
+ * the current order page and the list of all orders page.
+ *
+ * @author Ashley Berlinski, Francisco Marquez
+ */
 public class RUCafeMainController {
     private Stage primaryStage;
     private Scene primaryScene;

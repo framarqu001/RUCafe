@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 
 /**
  * The OrderList class contains a list of all the orders placed in RUCafe.
+ *
+ * @author Ashley Berlinski, Francisco Marquez
  */
 public class OrderList {
     ObservableList<Order> orderList;

@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 /**
  * Class meant to represent a donut box, contains a collection of donuts as well as a pending donut object that
  * may or may not be added to the donut box.
+ *
+ * @author Ashley Berlinski
  */
 public class DonutBox extends MenuItem{
     private ObservableList<Donut> donuts;

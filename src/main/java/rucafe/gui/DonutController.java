@@ -23,6 +23,8 @@ import java.util.Optional;
 
 /**
  * Controller for Donut view, allows user to order a box of donuts and add them to their order.
+ *
+ * @author Ashley Berlinski
  */
 public class DonutController {
 
@@ -60,7 +62,8 @@ public class DonutController {
 
 
     /**
-     * Sets the stage for the donut view as well as all of its components, stores references to parent stage and scene.
+     * Sets the stage for the donut controller as well as all of its components,
+     * stores references to parent stage and scene.
      * @param stage the reference to the parent stage.
      * @param scene the reference to the parent scene.
      */
