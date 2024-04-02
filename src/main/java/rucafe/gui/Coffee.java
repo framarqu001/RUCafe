@@ -28,6 +28,7 @@ public class Coffee extends MenuItem {
         }
 
         /**
+         * Returns A formatted Enum string that capitalizes the first letter.
          * @return A formatted Enum string that capitalizes the first letter.
          */
         @Override
@@ -37,6 +38,7 @@ public class Coffee extends MenuItem {
         }
 
         /**
+         * Returns the price of a Size Enum.
          * @return the price of a Size Enum.
          */
         public double getPrice() {
@@ -60,6 +62,7 @@ public class Coffee extends MenuItem {
         }
 
         /**
+         * Returns A formatted Enum string that capitalizes the first letter.
          * @return A formatted Enum string that capitalizes the first letter.
          */
         @Override
@@ -69,6 +72,7 @@ public class Coffee extends MenuItem {
         }
 
         /**
+         * Returns the price of a AddIns Enum.
          * @return the price of a AddIns Enum.
          */
         public double getPrice() {
@@ -103,6 +107,10 @@ public class Coffee extends MenuItem {
         this.quantity = copy.quantity;
     }
 
+    /**
+     * Returns a copy of the coffee object.
+     * @return a copy of the coffee object.
+     */
     @Override
     public MenuItem clone() {
         return new Coffee(this);
@@ -110,7 +118,7 @@ public class Coffee extends MenuItem {
 
     /**
      * Abstract method of Menu Item. Determines the price of a Coffee object.
-     * @return
+     * @return the price of a Coffee object.
      */
     @Override
     public double price () {

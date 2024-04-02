@@ -46,6 +46,7 @@ public class CurrentOrderController {
      * Sets the reference to the current order.
      * Initializes the list view to show the menu items comprising the order.
      * @param order reference to the current order.
+     * @param orderList the list of all orders
      */
     public void setCurrentOrder(Order order, OrderList orderList) {
         currentOrder = order;

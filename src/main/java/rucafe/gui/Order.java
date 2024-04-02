@@ -47,13 +47,14 @@ public class Order {
 
     /**
      * String property that contains a string showing a formatted total of an order.
-     * @return
+     * @return String property that contains a string showing a formatted total of an order.
      */
     public SimpleStringProperty totalStringProperty () {
         return totalStringProperty;
     }
 
     /**
+     * Returns String property that contains a string showing a formatted sub-total of an order.
      * @return String property that contains a string showing a formatted sub-total of an order.
      */
     public SimpleStringProperty subTotalStringProperty () {
@@ -61,6 +62,7 @@ public class Order {
     }
 
     /**
+     * Returns String property that contains a string showing the formatted sales-tax of an order.
      * @return String property that contains a string showing the formatted sales-tax of an order.
      */
     public SimpleStringProperty getSalesTaxStringProperty() {
@@ -120,6 +122,7 @@ public class Order {
     }
 
     /**
+     * Determines if order has any menu items or not.
      * @return true if the order contains no menu items, false otherwise.
      */
     public boolean isEmpty() {
@@ -151,6 +154,7 @@ public class Order {
     }
 
     /**
+     * Returns the ID number of the Order.
      * @return the ID number of the Order.
      */
     public int getID () {
@@ -159,6 +163,7 @@ public class Order {
 
 
     /**
+     * Returns a formatted String of an order only showing its order number.
      * @return Formatted String of an order only showing its order number.
      */
     @Override

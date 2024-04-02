@@ -35,6 +35,7 @@ public class OrderList {
     }
 
     /**
+     * Returns The list of orders held by OrderList
      * @return The list of orders held by OrderList
      */
     public ObservableList<Order> getOrderList () {
@@ -42,6 +43,7 @@ public class OrderList {
     }
 
     /**
+     * Determines if the order list has any orders.
      * @return True if order list is empty, false otehrwise.
      */
     public boolean isEmpty () {

@@ -38,11 +38,17 @@ abstract public class MenuItem {
      */
     public abstract double price();
 
+    /**
+     * Method used to make a copy of the current menu item, should be overwritten by any child class
+     * that wishes to use this method.
+     * @return null since the child classes should override this method.
+     */
     @Override
     public MenuItem clone() {
         return null;}
 
     /**
+     * Returns The price of a menu Item.
      * @return The price of a menu Item.
      */
     public double getPrice () {
@@ -59,6 +65,7 @@ abstract public class MenuItem {
     }
 
     /**
+     * Returns a String value of the menu items priceStringProperty.
      * @return A String value of the menu items priceStringProperty.
      */
     public String getPriceString () {
@@ -66,6 +73,7 @@ abstract public class MenuItem {
     }
 
     /**
+     * Returns a priceStringProperty of the menu item
      * @return A priceStringProperty of the menu item
      */
     public StringProperty priceStringProperty () {
@@ -82,6 +90,7 @@ abstract public class MenuItem {
     }
 
     /**
+     * Returns a formatted String reflecting the menu item's price in format $xx.xx.
      * @return A formatted String reflecting the menu item's price in format $xx.xx.
      */
     @Override
