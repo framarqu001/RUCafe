@@ -183,7 +183,7 @@ public class DonutController {
      * asks user if they would like to add donut to box or discard it.
      * @return true if the user choose to add the donut to the box, false if otherwise.
      */
-    public boolean alertAddPendingDonutToBox() {
+    private boolean alertAddPendingDonutToBox() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Add");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Discard");
@@ -296,7 +296,7 @@ public class DonutController {
      * If the box has donuts inside, asks user if they want to leave.
      */
     @FXML
-    protected void displayMain() {
+    public void displayMain() {
         if(!(donuts.isEmpty()) && !(confirmLeave()))
             return;
         primaryStage.setScene(primaryScene);

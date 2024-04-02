@@ -53,7 +53,7 @@ public class RUCafeMainController {
      * Passes references to the current order and the primary stage/scene.
      */
     @FXML
-    protected void displayCoffeeView() {
+    public void displayCoffeeView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("coffeeView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -76,7 +76,7 @@ public class RUCafeMainController {
      * Passes references to the current order, orderList and the primary stage/scene.
      */
     @FXML
-    protected void displayCurrentOrderView() {
+    public void displayCurrentOrderView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("currentOrderView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -100,7 +100,7 @@ public class RUCafeMainController {
      * Passes references to the current order and the primary stage/scene.
      */
     @FXML
-    protected void displaySandwichView(){
+    public void displaySandwichView(){
 
         String SandwichFXMLFilePath = "sandwichView.fxml";
         try{
@@ -127,7 +127,7 @@ public class RUCafeMainController {
      * Passes references to the current order and the primary stage/scene.
      */
     @FXML
-    protected void displayDonutView(){
+    public void displayDonutView(){
 
         String DonutFXMLFilePath = "donutView.fxml";
         try{
@@ -155,7 +155,7 @@ public class RUCafeMainController {
      * Does not allow the user to navigate to the scene if no orders have been placed.
      */
     @FXML
-    protected void displayOrderListView() {
+    public void displayOrderListView() {
         if (orderList.isEmpty()) {
             Alert warning = new Alert(Alert.AlertType.WARNING);
             warning.setTitle("No orders");

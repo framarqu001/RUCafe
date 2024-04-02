@@ -14,7 +14,6 @@ import java.text.DecimalFormat;
  */
 public class Order {
     private static int TOTAL_ORDERS = 0;
-
     private int orderNumber;
     private ObservableList<MenuItem> menuItems;
     private double total;

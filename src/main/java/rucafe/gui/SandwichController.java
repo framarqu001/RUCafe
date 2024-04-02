@@ -25,7 +25,6 @@ public class SandwichController {
     private Stage primaryStage;
     private Scene primaryScene;
     private Order currentOrder;
-    private RUCafeMainController mainController;
 
     @FXML
     private ImageView iv_Sandwich;
@@ -141,7 +140,7 @@ public class SandwichController {
      * Sets protein of the sandwich depending on value of combobox.
      */
     @FXML
-    protected void setProtein() {
+    public void setProtein() {
         sandwich.setProtein(cmb_Protein.getValue());
     }
 
@@ -149,7 +148,7 @@ public class SandwichController {
      * Sets protein of the sandwich depending on value of combobox.
      */
     @FXML
-    protected void setBread() {
+    public void setBread() {
         sandwich.setBread(cmb_Bread.getValue());
     }
 
@@ -157,7 +156,7 @@ public class SandwichController {
      * If the cheese checkbox is selected or not, adds or removes cheese from the sandwich respectively.
      */
     @FXML
-    protected void addCheese() {
+    public void addCheese() {
         manageAddOns(chk_cheese, Sandwich.AddOn.CHEESE);
     }
 
@@ -165,7 +164,7 @@ public class SandwichController {
      * If the lettuce checkbox is selected or not, adds or removes lettuce from the sandwich respectively.
      */
     @FXML
-    protected void addLettuce() {
+    public void addLettuce() {
         manageAddOns(chk_lettuce, Sandwich.AddOn.LETTUCE);
     }
 
@@ -173,7 +172,7 @@ public class SandwichController {
      * If the tomatoes checkbox is selected or not, adds or removes tomatoes from the sandwich respectively.
      */
     @FXML
-    protected void addTomatoes() {
+    public void addTomatoes() {
         manageAddOns(chk_tomatoes, Sandwich.AddOn.TOMATOES);
     }
 
@@ -181,7 +180,7 @@ public class SandwichController {
      * If the onions checkbox is selected or not, adds or removes onions from the sandwich respectively.
      */
     @FXML
-    protected void addOnions() {
+    public void addOnions() {
         manageAddOns(chk_onions, Sandwich.AddOn.ONIONS);
     }
 
@@ -189,7 +188,7 @@ public class SandwichController {
      * Creates a new sandwich and resets all comboboxes and checkboxes to their default values.
      */
     @FXML
-    protected void clear() {
+    public void clear() {
         sandwich = new Sandwich();
         tf_price.textProperty().bind(sandwich.priceStringProperty());
 
@@ -208,7 +207,7 @@ public class SandwichController {
      * If there is an issue displays warning to user informing them what they need to do to place their order.
      */
     @FXML
-    void addToOrder() {
+    public void addToOrder() {
         if(sandwich.isIncomplete()) {
             alertIncompleteSandwich();
             return;
@@ -225,7 +224,7 @@ public class SandwichController {
      * Returns user back to main page.
      */
     @FXML
-    protected void displayMain() {
+    public void displayMain() {
         primaryStage.setScene(primaryScene);
     }
 

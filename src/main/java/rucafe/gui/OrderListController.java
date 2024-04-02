@@ -93,7 +93,7 @@ public class OrderListController {
      * Changes the current scene back the primary scene (mainView).
      */
     @FXML
-    protected void displayMain(){
+    public void displayMain(){
         primaryStage.setScene(primaryScene);
     }
 

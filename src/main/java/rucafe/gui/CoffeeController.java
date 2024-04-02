@@ -49,7 +49,7 @@ public class CoffeeController {
      * Confirms with the user that they want to place the order with an alert.
      */
     @FXML
-    void addToOrder() {
+    public void addToOrder() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Yes");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
@@ -103,7 +103,7 @@ public class CoffeeController {
      * Adds a Caramel addIn to coffee if selected, removes if deselected.
      */
     @FXML
-    void setCaramel() {
+    public void setCaramel() {
         if (cb_caramel.isSelected()) {
             coffeeOrder.addAddIn(Coffee.AddIns.CARAMEL);
         } else {
@@ -115,7 +115,7 @@ public class CoffeeController {
      * Adds an Irish Cream addIn to coffee if selected, removes if deselected.
      */
     @FXML
-    void setIrishCream() {
+    public void setIrishCream() {
         if (cb_IrishCream.isSelected()) {
             coffeeOrder.addAddIn(Coffee.AddIns.IRISH_CREAM);
         } else {
@@ -127,7 +127,7 @@ public class CoffeeController {
      * Adds a Mocha addIn to coffee if selected, removes if deselected.
      */
     @FXML
-    void setMocha() {
+    public void setMocha() {
         if (cb_mocha.isSelected()) {
             coffeeOrder.addAddIn(Coffee.AddIns.MOCHA);
         } else {
@@ -139,7 +139,7 @@ public class CoffeeController {
      * Adds a Sweet Cream addIn to coffee if selected, removes if deselected.
      */
     @FXML
-    void setSweetCream() {
+    public void setSweetCream() {
         if (cb_sweetCream.isSelected()) {
             coffeeOrder.addAddIn(Coffee.AddIns.SWEET_CREAM);
         } else {
@@ -151,7 +151,7 @@ public class CoffeeController {
      * Adds a French Vanilla addIn to coffee if selected, removes if deselected.
      */
     @FXML
-    void setFrenchVanilla() {
+    public void setFrenchVanilla() {
         if (cb_frenchVanilla.isSelected()) {
             coffeeOrder.addAddIn(Coffee.AddIns.FRENCH_VANILLA);
         } else {
@@ -163,7 +163,7 @@ public class CoffeeController {
      * Changes the current scene back the primary scene (mainView).
      */
     @FXML
-    protected void displayMain(){
+    public void displayMain(){
         primaryStage.setScene(primaryScene);
     }
 
